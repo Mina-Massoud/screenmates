@@ -18,6 +18,7 @@
     "clipboard-copy": "^4.0.1",
     "ite": "^0.0.1",
     "js-cookie": "^3.0.5",
+    "mte-install": "^1.0.3",
     "react": "^18.2.0",
     "react-bottom-scroll-listener": "^5.1.0",
     "react-cloudinary-upload-widget": "^2.0.0",
