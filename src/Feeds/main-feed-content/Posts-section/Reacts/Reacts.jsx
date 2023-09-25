@@ -52,7 +52,10 @@ const Reacts = ({ id, reactType }) => {
   }, [flagHover]);
 
   function handleReactSelected(event) {
-    if (ReactSelected.ReactType === event.target.name || ReactSelected.ReactType) {
+    if (
+      ReactSelected.ReactType === event.target.name ||
+      ReactSelected.ReactType
+    ) {
       const ClickSoundEffect = new Audio(UnselectSound);
       ClickSoundEffect.volume = 0.6;
       ClickSoundEffect.play();
@@ -106,78 +109,81 @@ const Reacts = ({ id, reactType }) => {
   }
 
   return (
-    <div
-      onMouseLeave={() => {
-        setFlagHover(false);
-      }}
-      onMouseOver={() => {
-        setFlagHover(true);
-      }}
-      onTouchStart={() => {
-        setFlagHover(true);
-      }}
-      className={`flex animate__animated z-[9999999] animate__bounceIn reacts ${
-        showReacts && "reacts-hover"
-      }`}
-    >
-      <img
-        onClick={(event) => {
-          handleReactSelected(event);
+    <div className="z-max" onClick={()=>{console.log("clikec");}}>
+      <div
+        onMouseLeave={() => {
+          setFlagHover(false);
         }}
-        src={showReacts ? Love : ReactSelected.ImgSrc}
-        name="Love"
-        className={`${
-          !showReacts
-            ? "first-child-mr-handle " + styleHandle[ReactSelected.ReactType]
-            : styleHandle.Love
-        } h-full p-[0.35em] rounded-full select-none`}
-        alt=""
-      />
-      <img
-        onClick={(event) => {
-          handleReactSelected(event);
+        onMouseOver={() => {
+          setFlagHover(true);
         }}
-        src={Thunder}
-        name="Thunder"
-        className={`h-full ${styleHandle.Thunder}  p-[0.35em] react rounded-full`}
-        alt=""
-      />
-      <img
-        onClick={(event) => {
-          handleReactSelected(event);
+        onTouchStart={() => {
+          setFlagHover(true);
         }}
-        src={Amazing}
-        name="Amazing"
-        className={`h-full ${styleHandle.Amazing} p-[0.35em] rounded-full`}
-        alt=""
-      />
-      <img
-        onClick={(event) => {
-          handleReactSelected(event);
-        }}
-        src={Dislike}
-        name="Dislike"
-        className={`h-full ${styleHandle.Dislike} p-[0.35em] rounded-full`}
-        alt=""
-      />
-      <img
-        onClick={(event) => {
-          handleReactSelected(event);
-        }}
-        src={Skull}
-        name="Skull"
-        className={`h-full ${styleHandle.Skull} p-[0.35em] rounded-full`}
-        alt=""
-      />
-      <img
-        onClick={(event) => {
-          handleReactSelected(event);
-        }}
-        src={Shit}
-        name="Shit"
-        className={`h-full ${styleHandle.Shit} p-[0.35em] rounded-full`}
-        alt=""
-      />
+        className={`flex animate__animated z-[9999999] animate__bounceIn reacts ${
+          showReacts && "reacts-hover"
+        }`}
+      >
+        <img
+          onClick={(event) => {
+            handleReactSelected(event);
+          }}
+          src={showReacts ? Love : ReactSelected.ImgSrc}
+          draggable = {false}
+          name="Love"
+          className={`${
+            !showReacts
+              ? "first-child-mr-handle " + styleHandle[ReactSelected.ReactType]
+              : styleHandle.Love
+          } h-full p-[0.35em] rounded-full select-none`}
+          alt=""
+        />
+        <img
+          onClick={(event) => {
+            handleReactSelected(event);
+          }}
+          src={Thunder}
+          name="Thunder"
+          className={`h-full ${styleHandle.Thunder}  p-[0.35em] react rounded-full`}
+          alt=""
+        />
+        <img
+          onClick={(event) => {
+            handleReactSelected(event);
+          }}
+          src={Amazing}
+          name="Amazing"
+          className={`h-full ${styleHandle.Amazing} p-[0.35em] rounded-full`}
+          alt=""
+        />
+        <img
+          onClick={(event) => {
+            handleReactSelected(event);
+          }}
+          src={Dislike}
+          name="Dislike"
+          className={`h-full ${styleHandle.Dislike} p-[0.35em] rounded-full`}
+          alt=""
+        />
+        <img
+          onClick={(event) => {
+            handleReactSelected(event);
+          }}
+          src={Skull}
+          name="Skull"
+          className={`h-full ${styleHandle.Skull} p-[0.35em] rounded-full`}
+          alt=""
+        />
+        <img
+          onClick={(event) => {
+            handleReactSelected(event);
+          }}
+          src={Shit}
+          name="Shit"
+          className={`h-full ${styleHandle.Shit} p-[0.35em] rounded-full`}
+          alt=""
+        />
+      </div>
     </div>
   );
 };
