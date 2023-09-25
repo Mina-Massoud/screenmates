@@ -26,13 +26,17 @@ const Feeds = (props) => {
             sendReactToParentFeeds={sendReactToParentFeeds}
             id={showingPostDetails}
           />
-          <AiOutlineClose
-            onClick={() => {
-              setShowingPostDetails(false);
-            }}
-            className="fixed cursor-pointer z-max border top-[2em] rounded-full p-[0.2em]"
-            size={25}
-          />
+         <div className="bg-black fixed top-[0em] z-max w-full h-[80px]">
+            <AiOutlineClose
+              onClick={() => {
+                setTimeout(() => {
+                  setShowingPostDetails(false);
+                }, 150);
+              }}
+              className=" vertical-center cursor-pointer border  bg-white text-black left-5 rounded-full p-[0.2em]"
+              size={25}
+            />
+          </div>
         </>
       )}
       <div className="main-feed-grid max-h-[91vh] flex-grow">

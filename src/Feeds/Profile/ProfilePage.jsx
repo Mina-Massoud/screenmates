@@ -43,7 +43,9 @@ const ProfilePage = (props) => {
 
   useEffect(() => {
     axios
-      .get(`https://screenmates.onrender.com/users/${userNameURL}?req=${GetUserName()}`)
+      .get(
+        `https://screenmates.onrender.com/users/${userNameURL}?req=${GetUserName()}`
+      )
       .then(function (response) {
         // handle success
         setUserData(response.data[0]);
@@ -76,9 +78,12 @@ const ProfilePage = (props) => {
         if (!error && result && result.event === "success") {
           if (result.info.resource_type === "image") {
             axios
-              .put(`https://screenmates-beta-v.onrender.com/users/${userNameURL}`, {
-                coverURL: result.info.url,
-              })
+              .put(
+                `https://screenmates-beta-v.onrender.com/users/${userNameURL}`,
+                {
+                  coverURL: result.info.url,
+                }
+              )
               .then((response) => {
                 // Handle the response here
                 console.log(response);
@@ -110,9 +115,12 @@ const ProfilePage = (props) => {
         if (!error && result && result.event === "success") {
           if (result.info.resource_type === "image") {
             axios
-              .put(`https://screenmates-beta-v.onrender.com/users/${userNameURL}`, {
-                imgURL: result.info.url,
-              })
+              .put(
+                `https://screenmates-beta-v.onrender.com/users/${userNameURL}`,
+                {
+                  imgURL: result.info.url,
+                }
+              )
               .then((response) => {
                 // Handle the response here
                 console.log(response);
@@ -164,9 +172,12 @@ const ProfilePage = (props) => {
   // Friend APIS
   function handeSendRequest() {
     axios
-      .post(`https://screenmates-beta-v.onrender.com/users/${userNameURL}/friendRequests`, {
-        friendUserName: CurrentUser,
-      })
+      .post(
+        `https://screenmates-beta-v.onrender.com/users/${userNameURL}/friendRequests`,
+        {
+          friendUserName: CurrentUser,
+        }
+      )
       .then((response) => {
         // Handle the response here
         showFriendRequestBtn();
@@ -209,9 +220,12 @@ const ProfilePage = (props) => {
 
   function handleAcceptFriend() {
     axios
-      .post(`https://screenmates-beta-v.onrender.com/users/${CurrentUser}/friends`, {
-        friendUserName: userNameURL,
-      })
+      .post(
+        `https://screenmates-beta-v.onrender.com/users/${CurrentUser}/friends`,
+        {
+          friendUserName: userNameURL,
+        }
+      )
       .then((response) => {
         // Handle the response here
         setCancelFriend(true);
@@ -263,17 +277,19 @@ const ProfilePage = (props) => {
             id={showingPostDetails}
             close={closingPostDetails}
           />
-          <AiOutlineClose
-            onClick={() => {
-              setCLosingPostDetails(true);
-              setTimeout(() => {
-                setShowingPostDetails(false);
-                setCLosingPostDetails(false);
-              }, 150);
-            }}
-            className="fixed cursor-pointer z-max border top-[2em] bg-white text-black left-5 rounded-full p-[0.2em]"
-            size={25}
-          />
+          <div className="bg-black fixed top-[0em] z-max w-full h-[80px]">
+            <AiOutlineClose
+              onClick={() => {
+                setCLosingPostDetails(true);
+                setTimeout(() => {
+                  setShowingPostDetails(false);
+                  setCLosingPostDetails(false);
+                }, 150);
+              }}
+              className="vertical-center cursor-pointer border  bg-white text-black left-5 rounded-full p-[0.2em]"
+              size={25}
+            />
+          </div>
         </>
       )}
       <div className="profile-grid bg-[#171717] border-t border-gray-700 mt-[7em]">

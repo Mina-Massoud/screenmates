@@ -912,6 +912,15 @@ body {
 .z-max {
   z-index: 99999999 !important;
 }
+.z-max-2 { 
+  z-index: 999999999 !important;
+}
+.z-m {
+  z-index: 2!important;
+}
+.z-mm {
+  z-index: 3 !important;
+}
 .horizontal-center {
   left: 50%;
   transform: translateX(-50%);

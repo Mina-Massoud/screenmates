@@ -36,7 +36,9 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
 
   useEffect(() => {
     axios
-      .get(`https://screenmates-beta-v.onrender.com/posts/${id}?req=${GetUserName()}`) // Pass an object with key-value pairs
+      .get(
+        `https://screenmates-beta-v.onrender.com/posts/${id}?req=${GetUserName()}`
+      ) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
         setData(response.data[0]);
@@ -89,6 +91,8 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
     );
   }
 
+  console.log(id);
+
   return (
     <div
       className={`fixed w-full full-center ${
@@ -98,11 +102,13 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
       } overflow-y-auto bg-effect flex justify-center pt-[4em] z-max min-h-[100vh]`}
     >
       {closeSelf && (
-        <AiOutlineClose
-          onClick={handleCloseEffect}
-          className="absolute left-[1em] top-[1em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
-          size={20}
-        />
+        <div className="bg-black fixed top-[0em] z-max w-full h-[80px]">
+          <AiOutlineClose
+            onClick={handleCloseEffect}
+            className=" vertical-center cursor-pointer border  bg-white text-black left-5 rounded-full p-[0.2em]"
+            size={25}
+          />
+        </div>
       )}
       <div className="flex-grow fixed top-[6em] comments-grid grid-rows-max-content">
         <div className="posts-cont col-start-2 md:mr-[2em]">
