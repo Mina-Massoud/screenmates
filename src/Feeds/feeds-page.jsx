@@ -19,7 +19,7 @@ const Feeds = (props) => {
   }
 
   return (
-    <div className="mt-[5.5em] mx-[0.5em] max-h-[100vh] flex-grow flex">
+    <>
       {showingPostDetails && (
         <>
           <PostDetails
@@ -29,15 +29,17 @@ const Feeds = (props) => {
           />
         </>
       )}
-      <div className="main-feed-grid max-h-[91vh] flex-grow">
-        <LeftFeedSide />
-        <Mainfeed
-          ParentShowingPostHandler={ParentShowingPostHandler}
-          forceRender={forceRender}
-        />
-        <FriendsSide />
+      <div className="mt-[5.5em] mx-[0.5em] max-h-[100vh] flex-grow flex">
+        <div className="main-feed-grid max-h-[91vh] flex-grow">
+          <LeftFeedSide />
+          <Mainfeed
+            ParentShowingPostHandler={ParentShowingPostHandler}
+            forceRender={forceRender}
+          />
+          <FriendsSide />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -79,7 +79,7 @@ const PostDetails = ({
 
   if (!data) {
     return (
-      <div className="flex animate__animated animate__zoomIn left-0 items-center justify-center w-full  full-center bg-effect z-max h-[100vh]">
+      <div className="flex fixed animate__animated animate__zoomIn left-0 items-center justify-center w-full full-center bg-effect z-max h-[100vh]">
         <ReactLoading
           type={"spin"}
           color={"#ea3cd2"}
