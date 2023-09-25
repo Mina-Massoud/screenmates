@@ -271,7 +271,7 @@ const ProfilePage = (props) => {
                 setCLosingPostDetails(false);
               }, 150);
             }}
-            className="fixed cursor-pointer z-max border top-[5em] bg-white text-black left-5 rounded-full p-[0.2em]"
+            className="fixed cursor-pointer z-max border top-[2em] bg-white text-black left-5 rounded-full p-[0.2em]"
             size={25}
           />
         </>
