@@ -42,7 +42,6 @@ const Mainfeed = ({
     pageNumber.current = pageNumber.current + 1;
     console.log("Updated pageNumber:", pageNumber.current);
 
-    console.log(pageNumber);
     const apiUrl = profile
       ? `https://screenmates-beta-v.onrender.com/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}&offset=${
           pageNumber.current
@@ -53,9 +52,7 @@ const Mainfeed = ({
       .get(apiUrl)
       .then(function (response) {
         // handle success
-        console.log(response);
         if (!response.data.length) {
-          console.log(response.data.length);
           setHasMoreState(false);
           return;
         }

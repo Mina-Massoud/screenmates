@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Thunder from "../../../../media/Reacts/Thunder.gif";
 import Amazing from "../../../../media/Reacts/Amazing.gif";
 import Dislike from "../../../../media/Reacts/dislike.gif";
@@ -24,6 +24,25 @@ const Reacts = ({ id, reactType }) => {
     Skull,
   };
   const styleHandle = ReactStyle();
+  const delay = 1000;
+  const startPress = useRef();
+  const touchTimeOut = useRef(null);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    // Update the screenWidth state when the window is resized
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    // Attach the resize event listener when the component mounts
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const [ReactSelected, setReactSelected] = useState({
     ReactType: reactType ? reactType : "",
@@ -31,19 +50,11 @@ const Reacts = ({ id, reactType }) => {
     activeColor: reactType ? styleHandle[reactType] : styleHandle.None,
   });
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Check if the device is a mobile device
-    if ("ontouchstart" in window || navigator.maxTouchPoints) {
-      setIsMobile(true);
-    }
-  }, []);
-
   useEffect(() => {
     let showReactDelay;
     let closeReactsDelay;
-    if (!isMobile) {
+
+    if (screenWidth > 768) {
       if (flagHover) {
         showReactDelay = setTimeout(() => {
           setShowReacts(true);
@@ -61,11 +72,23 @@ const Reacts = ({ id, reactType }) => {
     };
   }, [flagHover]);
 
+  function touchStart() {
+    startPress.current = Date.now();
+    touchTimeOut.current = setTimeout(() => {
+      setShowReacts(true);
+    }, delay);
+  }
+
+  function touchEnd() {
+    if (Date.now() - startPress.current < delay) {
+      console.log("cancel holding");
+      clearTimeout(touchTimeOut.current);
+    }
+  }
+
   function handleReactSelected(event) {
-    if (
-      ReactSelected.ReactType === event.target.name ||
-      ReactSelected.ReactType
-    ) {
+    console.log(ReactSelected.ReactType);
+    if (ReactSelected.ReactType === event.target.name) {
       const ClickSoundEffect = new Audio(UnselectSound);
       ClickSoundEffect.volume = 0.6;
       ClickSoundEffect.play();
@@ -86,6 +109,7 @@ const Reacts = ({ id, reactType }) => {
         ImgSrc: empty,
         activeColor: "bg-transparent",
       });
+      setShowReacts(false)
       return 0;
     }
     const target = event.target;
@@ -136,6 +160,8 @@ const Reacts = ({ id, reactType }) => {
         onMouseEnter={() => {
           setFlagHover(true);
         }}
+        onTouchStart={touchStart}
+        onTouchEnd={touchEnd}
         className={`flex animate__animated z-[9999999] animate__bounceIn reacts ${
           showReacts && "reacts-hover"
         }`}
