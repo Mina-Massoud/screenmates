@@ -7,7 +7,7 @@ const FriendPage = (props) => {
   const [friends, setFriends] = useState();
   useEffect(() => {
     axios
-      .get(`https://screenmates.onrender.com/users/${GetUserName()}/friends`)
+      .get(`https://screenmates-beta-v.onrender.com/users/${GetUserName()}/friends`)
       .then((response) => {
         // Handle the response here
         setFriends(response.data);

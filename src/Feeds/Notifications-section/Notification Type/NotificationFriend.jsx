@@ -8,7 +8,7 @@ const NotificationFriend = ({ causativeUser }) => {
   function handleAcceptFriend() {
     setConfirmedStatus("sending");
     axios
-      .post(`http://localhost:8000/users/${GetUserName()}/friends`, {
+      .post(`https://screenmates-beta-v.onrender.com/users/${GetUserName()}/friends`, {
         friendUserName: causativeUser,
       })
       .then((response) => {

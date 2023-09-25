@@ -76,7 +76,7 @@ const ProfilePage = (props) => {
         if (!error && result && result.event === "success") {
           if (result.info.resource_type === "image") {
             axios
-              .put(`https://screenmates.onrender.com/users/${userNameURL}`, {
+              .put(`https://screenmates-beta-v.onrender.com/users/${userNameURL}`, {
                 coverURL: result.info.url,
               })
               .then((response) => {
@@ -110,7 +110,7 @@ const ProfilePage = (props) => {
         if (!error && result && result.event === "success") {
           if (result.info.resource_type === "image") {
             axios
-              .put(`https://screenmates.onrender.com/users/${userNameURL}`, {
+              .put(`https://screenmates-beta-v.onrender.com/users/${userNameURL}`, {
                 imgURL: result.info.url,
               })
               .then((response) => {
@@ -164,7 +164,7 @@ const ProfilePage = (props) => {
   // Friend APIS
   function handeSendRequest() {
     axios
-      .post(`https://screenmates.onrender.com/users/${userNameURL}/friendRequests`, {
+      .post(`https://screenmates-beta-v.onrender.com/users/${userNameURL}/friendRequests`, {
         friendUserName: CurrentUser,
       })
       .then((response) => {
@@ -180,7 +180,7 @@ const ProfilePage = (props) => {
   function handleDeleteFriend() {
     axios
       .delete(
-        `https://screenmates.onrender.com/users/${userNameURL}/friends/${CurrentUser}`
+        `https://screenmates-beta-v.onrender.com/users/${userNameURL}/friends/${CurrentUser}`
       )
       .then((response) => {
         // Handle the response here
@@ -195,7 +195,7 @@ const ProfilePage = (props) => {
   function handleDeleteRequest() {
     axios
       .delete(
-        `https://screenmates.onrender.com/users/${userNameURL}/friendRequests/${CurrentUser}`
+        `https://screenmates-beta-v.onrender.com/users/${userNameURL}/friendRequests/${CurrentUser}`
       )
       .then((response) => {
         // Handle the response here
@@ -209,7 +209,7 @@ const ProfilePage = (props) => {
 
   function handleAcceptFriend() {
     axios
-      .post(`https://screenmates.onrender.com/users/${CurrentUser}/friends`, {
+      .post(`https://screenmates-beta-v.onrender.com/users/${CurrentUser}/friends`, {
         friendUserName: userNameURL,
       })
       .then((response) => {

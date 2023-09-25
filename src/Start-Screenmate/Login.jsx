@@ -29,7 +29,7 @@ const Login = () => {
       return
     }
     axios
-      .post("https://screenmates.onrender.com/login/", loginData)
+      .post("https://screenmates-beta-v.onrender.com/login/", loginData)
       .then(function (response) {
         console.log(response); // handle success
         navigate("/");

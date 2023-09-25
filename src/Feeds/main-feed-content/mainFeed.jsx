@@ -44,10 +44,10 @@ const Mainfeed = ({
 
     console.log(pageNumber);
     const apiUrl = profile
-      ? `https://screenmates.onrender.com/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}&offset=${
+      ? `https://screenmates-beta-v.onrender.com/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}&offset=${
           pageNumber.current
         }&limit=${10}`
-      : `https://screenmates.onrender.com/feed/${userNameURL}?offset=${pageNumber}&limit=${10}`;
+      : `https://screenmates-beta-v.onrender.com/feed/${userNameURL}?offset=${pageNumber}&limit=${10}`;
 
     axios
       .get(apiUrl)

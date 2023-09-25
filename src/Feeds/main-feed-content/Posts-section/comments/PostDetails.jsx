@@ -36,7 +36,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
 
   useEffect(() => {
     axios
-      .get(`https://screenmates.onrender.com/posts/${id}?req=${GetUserName()}`) // Pass an object with key-value pairs
+      .get(`https://screenmates-beta-v.onrender.com/posts/${id}?req=${GetUserName()}`) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
         setData(response.data[0]);
@@ -50,7 +50,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   function handleSendComment() {
     const publisher = GetUserName();
     axios
-      .post(`https://screenmates.onrender.com/posts/${id}/comments`, {
+      .post(`https://screenmates-beta-v.onrender.com/posts/${id}/comments`, {
         publisher: publisher,
         caption: commentData, // Assuming commentData holds your comment content
       })

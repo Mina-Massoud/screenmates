@@ -18,7 +18,7 @@ const Home = (props) => {
 
   useEffect(() => {
     axios
-      .get(`https://screenmates.onrender.com/rooms`)
+      .get(`https://screenmates-beta-v.onrender.com/rooms`)
       .then(function (response) {
         console.log(response.data);
         setRooms(response.data);

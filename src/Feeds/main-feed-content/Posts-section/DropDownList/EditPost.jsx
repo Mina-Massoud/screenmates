@@ -22,7 +22,7 @@ const EditPost = ({ Initialvalue, postId, onCancel }) => {
     }
     setIsConfirmed("confirming");
     axios
-      .put(`https://screenmates.onrender.com/posts/${postId}`, {
+      .put(`https://screenmates-beta-v.onrender.com/posts/${postId}`, {
         caption: value,
       })
       .then(function (response) {

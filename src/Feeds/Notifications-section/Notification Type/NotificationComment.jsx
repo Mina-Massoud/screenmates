@@ -7,7 +7,7 @@ const NotficationsComment = ({ causativeUser , postId}) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/posts/${postId}`) // Pass an object with key-value pairs
+      .get(`https://screenmates-beta-v.onrender.com/posts/${postId}`) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
         console.log(response);

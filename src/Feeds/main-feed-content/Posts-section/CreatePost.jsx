@@ -19,7 +19,7 @@ const CreatePost = ({ sendPostToParentHandle }) => {
 
     if (myTextArea.current.value !== "" || previewURL || VideoURL) {
       axios
-        .post("https://screenmates.onrender.com/posts", {
+        .post("https://screenmates-beta-v.onrender.com/posts", {
           publisher: userName,
           caption: myTextArea.current.value,
           mediaURL: previewURL? previewURL : VideoURL ? VideoURL : "",

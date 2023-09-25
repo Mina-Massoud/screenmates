@@ -5,7 +5,7 @@ import axios from "axios";
 const DropDownPostsList = ({ id, isDeleted, isEdit }) => {
   function deletePostHandler(id) {
     axios
-      .delete(`https://screenmates.onrender.com/posts/${id}`)
+      .delete(`https://screenmates-beta-v.onrender.com/posts/${id}`)
       .then(function (response) {
         // handle success
         console.log(response);

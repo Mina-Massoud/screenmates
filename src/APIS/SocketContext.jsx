@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import GetUserName from "./getUserName";
 
-const socket = io.connect("https://screenmates.onrender.com/", {
+const socket = io.connect("https://screenmates-beta-v.onrender.com/", {
   query: {
     userName: GetUserName(),
   },
