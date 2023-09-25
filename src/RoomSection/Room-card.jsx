@@ -28,8 +28,8 @@ const RoomCard = ({ data }) => {
       <img
         className="h-[200px] object-center object-cover rounded-lg mb-[1em]"
         src={
-          data.videoData.videoData.ThumbnailURL
-            ? data.videoData.videoData.ThumbnailURL
+          data.roomData.videoData.ThumbnailURL
+            ? data.roomData.videoData.ThumbnailURL
             : imges[randomIndex]
         }
         alt=""
@@ -37,12 +37,14 @@ const RoomCard = ({ data }) => {
       <div className="title-of-room p-[0.5em]">
         <p>
           Watching :{" "}
-          {data.videoData.videoData.Title ? data.videoData.videoData.Title : "Not watching yet"}
+          {data.roomData.videoData.Title ? data.roomData.videoData.Title : "Not watching yet"}
         </p>
       </div>
       <div className="host py-[1em] p-[0.5em]">
         <p className="inline-block text-sm">Host:</p>{" "}
-        <p className="inline-block text-gray-400 text-sm">{data.videoData.owner}</p>
+        <p className="inline-block text-gray-400 text-sm">
+          {data.roomData.owner}
+        </p>
       </div>
       <button
         onClick={handleConnectingToRoom}

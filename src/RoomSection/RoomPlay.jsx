@@ -20,6 +20,7 @@ const RoomPlay = (props) => {
   const [isReady, setIsReady] = useState(false);
   const [isVideoStarted, setIsVideoStarted] = useState(false);
   const [currenttime, setCurrentTime] = useState(false);
+  const [userJoined, setUserIsJoined] = useState(false);
   // Function to copy the parameter to the clipboard
   const copyToClipboard = (roomID) => {
     copy(roomID);
@@ -45,6 +46,7 @@ const RoomPlay = (props) => {
     });
 
     socket.on("userJoined", (userID) => {
+      setUserIsJoined(true);
       handleSharedDetails(userID);
     });
 
@@ -93,9 +95,12 @@ const RoomPlay = (props) => {
   function handleOnPause() {
     socket.emit("video_paused", roomId);
   }
+  console.log("STARTEEEEEEEEEEEEEEED ", isVideoStarted);
 
   // Function to handle video play
   function handleOnPlay(event) {
+    console.log("entered");
+    setIsVideoStarted(true);
     if (canIEmit) {
       socket.emit("video_started", {
         roomId,
@@ -115,6 +120,16 @@ const RoomPlay = (props) => {
     });
   }
 
+  useEffect(() => {
+    if (isVideoStarted) {
+      console.log("userJoined");
+      socket.emit("video_started", {
+        roomId,
+        currentTime: playerRef.current.getCurrentTime(),
+      });
+    }
+  }, [userJoined]);
+
   // function to share current video status
   function handleSharedDetails(userID) {
     if (playerRef.current) {
@@ -123,11 +138,12 @@ const RoomPlay = (props) => {
         userID: userID,
         videoURL: SearchData,
       });
-
-      socket.emit("video_started", {
-        roomId,
-        currentTime: playerRef.current.getCurrentTime(),
-      });
+      // if (isVideoStarted) {
+      //   socket.emit("video_started", {
+      //     roomId,
+      //     currentTime: playerRef.current.getCurrentTime(),
+      //   });
+      // }
 
       // setTimeout(() => {
 
