@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 export function auth() {
   // Cookies.remove("token")
