@@ -130,7 +130,7 @@ const Reacts = ({ id, reactType }) => {
           !showReacts
             ? "first-child-mr-handle " + styleHandle[ReactSelected.ReactType]
             : styleHandle.Love
-        } h-full p-[0.35em] rounded-full`}
+        } h-full p-[0.35em] rounded-full select-none`}
         alt=""
       />
       <img

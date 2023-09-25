@@ -65,21 +65,29 @@ const Post = ({
         <div className="flex flex-col bg-[#181818] p-[0.6em] rounded-lg animate__animated animate__zoomIn">
           <div className="top-post-side flex justify-between items-center pb-[1em]">
             <div className="publisher-info flex">
-              <img
-                src={userData.imgURL ? userData.imgURL : defaultProfilePic}
-                className="w-[50px] h-[50px] object-cover rounded-full"
-                alt=""
-              />
+              <Link to={`/profile/${userData.userName}`}>
+                <img
+                  src={userData.imgURL ? userData.imgURL : defaultProfilePic}
+                  className="w-[50px] h-[50px] object-cover rounded-full"
+                  alt=""
+                />
+              </Link>
+
               <div className="info-tags ml-[1em]">
                 <div className="flex">
-                  <p className="text-[#818181]">@{userData.userName}</p>
+                  <Link to={`/profile/${userData.userName}`}>
+                    <p className="text-[#818181]">@{userData.userName}</p>
+                  </Link>
+
                   <p className="ml-[0.5em]">
                     {formatTimeAgo(data.publishDate)}
                   </p>
                 </div>
-                <h2 className="text-[1.2rem] capitalize font-black">
-                  {userData.firstName} {userData.lastName}
-                </h2>
+                <Link to={`/profile/${userData.userName}`}>
+                  <h2 className="text-[1.2rem] capitalize font-black">
+                    {userData.firstName} {userData.lastName}
+                  </h2>
+                </Link>
               </div>
             </div>
             <div className="mr-[1em] relative">

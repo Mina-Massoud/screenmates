@@ -10,6 +10,7 @@ import { SocketContext } from "../APIS/SocketContext";
 const RoomCard = ({ data }) => {
   const navigate = useNavigate();
   const socket = useContext(SocketContext);
+
   let imges = [testImg, test2, test3, test4, test5];
   let randomIndex = Math.floor(Math.random() * imges.length);
 
@@ -27,8 +28,8 @@ const RoomCard = ({ data }) => {
       <img
         className="h-[200px] object-center object-cover rounded-lg mb-[1em]"
         src={
-          data.videoData.ThumbnailURL
-            ? data.videoData.ThumbnailURL
+          data.videoData.videoData.ThumbnailURL
+            ? data.videoData.videoData.ThumbnailURL
             : imges[randomIndex]
         }
         alt=""
@@ -36,12 +37,12 @@ const RoomCard = ({ data }) => {
       <div className="title-of-room p-[0.5em]">
         <p>
           Watching :{" "}
-          {data.videoData.Title ? data.videoData.Title : "Not watching yet"}
+          {data.videoData.videoData.Title ? data.videoData.videoData.Title : "Not watching yet"}
         </p>
       </div>
       <div className="host py-[1em] p-[0.5em]">
         <p className="inline-block text-sm">Host:</p>{" "}
-        <p className="inline-block text-gray-400 text-sm">@miname23</p>
+        <p className="inline-block text-gray-400 text-sm">{data.videoData.owner}</p>
       </div>
       <button
         onClick={handleConnectingToRoom}
