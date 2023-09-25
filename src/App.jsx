@@ -3,7 +3,7 @@ import {
   RouterProvider,
   createRoutesFromElements,
   Route,
-  createBrowserRouter,
+  createHashRouter,
 } from "react-router-dom";
 import Layout from "./Layout/Layout";
 import Home from "./Home/Home";
@@ -36,7 +36,7 @@ export default function App() {
     "color: white; font-size: 24px"
   );
 
-  const router = createBrowserRouter(
+  const router = createHashRouter(
     createRoutesFromElements(
       <>
         <Route path="/start" element={<LandPage />} />
