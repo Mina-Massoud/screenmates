@@ -31,18 +31,28 @@ const Reacts = ({ id, reactType }) => {
     activeColor: reactType ? styleHandle[reactType] : styleHandle.None,
   });
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if the device is a mobile device
+    if ("ontouchstart" in window || navigator.maxTouchPoints) {
+      setIsMobile(true);
+    }
+  }, []);
+
   useEffect(() => {
     let showReactDelay;
     let closeReactsDelay;
-
-    if (flagHover) {
-      showReactDelay = setTimeout(() => {
-        setShowReacts(true);
-      }, 700);
-    } else {
-      closeReactsDelay = setTimeout(() => {
-        setShowReacts(false);
-      }, 600);
+    if (!isMobile) {
+      if (flagHover) {
+        showReactDelay = setTimeout(() => {
+          setShowReacts(true);
+        }, 700);
+      } else {
+        closeReactsDelay = setTimeout(() => {
+          setShowReacts(false);
+        }, 600);
+      }
     }
 
     return () => {
@@ -113,15 +123,17 @@ const Reacts = ({ id, reactType }) => {
   };
 
   return (
-    <div className="z-max" onClick={()=>{console.log("clikec");}}>
+    <div
+      className="z-max"
+      onClick={() => {
+        console.log("clikec");
+      }}
+    >
       <div
         onMouseLeave={() => {
           setFlagHover(false);
         }}
-        onMouseOver={() => {
-          setFlagHover(true);
-        }}
-        onTouchStart={() => {
+        onMouseEnter={() => {
           setFlagHover(true);
         }}
         className={`flex animate__animated z-[9999999] animate__bounceIn reacts ${
@@ -133,7 +145,7 @@ const Reacts = ({ id, reactType }) => {
             handleReactSelected(event);
           }}
           src={showReacts ? Love : ReactSelected.ImgSrc}
-          draggable = {false}
+          draggable={false}
           name="Love"
           className={`${
             !showReacts
