@@ -108,6 +108,10 @@ const Reacts = ({ id, reactType }) => {
     setShowReacts(false);
   }
 
+  const handleContextMenu = (e) => {
+    e.preventDefault(); // Prevent the default context menu
+  };
+
   return (
     <div className="z-max" onClick={()=>{console.log("clikec");}}>
       <div
@@ -137,6 +141,7 @@ const Reacts = ({ id, reactType }) => {
               : styleHandle.Love
           } h-full p-[0.35em] rounded-full select-none`}
           alt=""
+          onContextMenu={handleContextMenu}
         />
         <img
           onClick={(event) => {
