@@ -69,7 +69,7 @@ const Header = ({ StopSearch, setShowParent }) => {
           </Link>
         </div>
       </ul>
-      <div className="p-[2em] w-full bg-effect z-[9999] absolute flex items-center justify-between">
+      <div className="p-[2em] w-full z-[9999] absolute flex items-center justify-between">
         <Link
           className="main-text-gradient-color text-[1.5rem] font-black"
           to=".."
