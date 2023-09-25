@@ -17,7 +17,7 @@ const PostDetails = ({
   id,
   close = false,
   sendReactToParentFeeds,
-  ParentShowingPostHandler
+  ParentShowingPostHandler,
 }) => {
   const [data, setData] = useState();
   const [commentData, setCommentData] = useState();
@@ -71,7 +71,7 @@ const PostDetails = ({
 
   function handleCloseEffect() {
     setCloseSelf(true);
-    ParentShowingPostHandler(false)
+    ParentShowingPostHandler(false);
     if (location.state) {
       navigate(location.state ? location.state : "..");
     }
@@ -79,7 +79,7 @@ const PostDetails = ({
 
   if (!data) {
     return (
-      <div className="fixed flex animate__animated animate__zoomIn left-0 items-center justify-center w-full  full-center bg-effect z-max h-[100vh]">
+      <div className="flex animate__animated animate__zoomIn left-0 items-center justify-center w-full  full-center bg-effect z-max h-[100vh]">
         <ReactLoading
           type={"spin"}
           color={"#ea3cd2"}
@@ -90,18 +90,19 @@ const PostDetails = ({
     );
   }
 
-
   return (
     <div
-      className={`fixed w-full full-center overflow-y-auto bg-effect flex justify-center pt-[4em] z-max min-h-[100vh]`}
+      className={`fixed w-full full-center overflow-y-auto bg-effect flex flex-col items-center pt-[4em] z-max min-h-[100vh]`}
     >
-      <AiOutlineClose
-        onClick={handleCloseEffect}
-        className="absolute left-[1em] top-[1em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
-        size={20}
-      />
+      <div className="mr-auto py-[2em]">
+        <AiOutlineClose
+          onClick={handleCloseEffect}
+          className="relative z-max left-[4em] top-[0em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
+          size={20}
+        />
+      </div>
 
-      <div className="flex-grow fixed comments-grid grid-rows-max-content">
+      <div className="flex-grow comments-grid grid-rows-max-content">
         <div className="posts-cont col-start-2 md:mr-[2em]">
           <Post
             child={true}
