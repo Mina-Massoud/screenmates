@@ -25,13 +25,7 @@ const Feeds = (props) => {
           <PostDetails
             sendReactToParentFeeds={sendReactToParentFeeds}
             id={showingPostDetails}
-          />
-          <AiOutlineClose
-            onClick={() => {
-              setShowingPostDetails(false);
-            }}
-            className="fixed cursor-pointer z-max border top-5 rounded-full p-[0.2em]"
-            size={25}
+            ParentShowingPostHandler={ParentShowingPostHandler}
           />
         </>
       )}

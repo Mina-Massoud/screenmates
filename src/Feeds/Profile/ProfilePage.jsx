@@ -261,18 +261,7 @@ const ProfilePage = (props) => {
           <PostDetails
             sendReactToParentFeeds={sendReactToParentFeeds}
             id={showingPostDetails}
-            close={closingPostDetails}
-          />
-          <AiOutlineClose
-            onClick={() => {
-              setCLosingPostDetails(true);
-              setTimeout(() => {
-                setShowingPostDetails(false);
-                setCLosingPostDetails(false);
-              }, 150);
-            }}
-            className="fixed cursor-pointer z-max border top-5 bg-white text-black left-5 rounded-full p-[0.2em]"
-            size={25}
+            ParentShowingPostHandler={ParentShowingPostHandler}
           />
         </>
       )}

@@ -24,7 +24,7 @@ const SearchComponent = ({ getData, showContainer }) => {
       {showContainer && (
         <SearchContainer
           searchData={searchData}
-          className="absolute animate__animated animate__fadeIn w-full max-w-[500px] right-0 min-w-[250px] rounded-lg my-[1em] bg-[#ffffff24] bg-effect p-[0.4em]"
+          className="absolute animate_a_animated animte__fadeIn w-full max-w-[500px] right-[-20px] min-w-[250px] rounded-lg my-[1em] bg-[#ffffff24] bg-effect p-[0.4em]"
         />
       )}
     </div>

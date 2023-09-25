@@ -13,11 +13,15 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
+const PostDetails = ({
+  id,
+  close = false,
+  sendReactToParentFeeds,
+  ParentShowingPostHandler
+}) => {
   const [data, setData] = useState();
   const [commentData, setCommentData] = useState();
   const [flag, setFlag] = useState(false);
-  const [closed, setClosed] = useState(close);
   const [closeSelf, setCloseSelf] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,15 +32,10 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   console.log(param);
 
   useEffect(() => {
-    if (!id) {
-      id = param.id;
-      setCloseSelf(true);
-    }
-  }, []);
-
-  useEffect(() => {
     axios
-      .get(`https://screenmates-beta-v.onrender.com/posts/${id}?req=${GetUserName()}`) // Pass an object with key-value pairs
+      .get(
+        `https://screenmates-beta-v.onrender.com/posts/${id}?req=${GetUserName()}`
+      ) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
         setData(response.data[0]);
@@ -71,9 +70,11 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   }
 
   function handleCloseEffect() {
-    setClosed(true);
-    setCloseSelf(false);
-    navigate(location.state ? location.state : "..");
+    setCloseSelf(true);
+    ParentShowingPostHandler(false)
+    if (location.state) {
+      navigate(location.state ? location.state : "..");
+    }
   }
 
   if (!data) {
@@ -89,21 +90,17 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
     );
   }
 
+
   return (
     <div
-      className={`fixed w-full full-center ${
-        closed
-          ? "animate__animated animate__zoomOut"
-          : "animate__animated animate__zoomIn"
-      } overflow-y-auto bg-effect flex justify-center pt-[4em] z-max min-h-[100vh]`}
+      className={`fixed w-full full-center overflow-y-auto bg-effect flex justify-center pt-[4em] z-max min-h-[100vh]`}
     >
-      {closeSelf && (
-        <AiOutlineClose
-          onClick={handleCloseEffect}
-          className="absolute left-[1em] top-[1em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
-          size={20}
-        />
-      )}
+      <AiOutlineClose
+        onClick={handleCloseEffect}
+        className="absolute left-[1em] top-[1em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
+        size={20}
+      />
+
       <div className="flex-grow fixed comments-grid grid-rows-max-content">
         <div className="posts-cont col-start-2 md:mr-[2em]">
           <Post
