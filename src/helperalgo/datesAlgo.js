@@ -6,7 +6,7 @@ function formatTimeAgo(publishDate) {
 
   const seconds = Math.floor(timeDifference / 1000);
 
-  if (seconds === 0) {
+  if (seconds === 0 || seconds === -1) {
     return "Just Now!";
   }
 
