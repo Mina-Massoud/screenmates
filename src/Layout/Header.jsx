@@ -11,6 +11,7 @@ const Header = ({ StopSearch, setShowParent }) => {
 
   // Use a flag to track whether it's the first render
   const isFirstRender = useRef(true);
+  console.log(isFirstRender.current);
 
   useEffect(() => {
     // Check if it's not the first render

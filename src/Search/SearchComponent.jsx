@@ -3,7 +3,6 @@ import { BsSearch } from "react-icons/bs";
 import SearchContainer from "./SearchContainer";
 import { useState } from "react";
 const SearchComponent = ({ getData, showContainer }) => {
-  console.log(showContainer);
   const [searchData, setSearchData] = useState("");
 
   return (

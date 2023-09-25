@@ -4,9 +4,8 @@ import Chat from "../Chat-section/Chat";
 import { useContext } from "react";
 import { SocketContext } from "../APIS/SocketContext";
 import { useSearchParams } from "react-router-dom";
-import copy from "clipboard-copy";
+// import copy from "clipboard-copy";
 import "animate.css";
-import { async } from "react-cloudinary-upload-widget";
 
 const RoomPlay = (props) => {
   // State for rendering
@@ -166,14 +165,14 @@ const RoomPlay = (props) => {
         >
           Search
         </button>
-        <button
+        {/* <button
           onClick={() => {
             copyToClipboard(roomId);
           }}
           className="p-[1em] min-w-[100px] border border-[#ea3cd2] rounded-lg"
         >
           Room ID
-        </button>
+        </button> */}
       </div>
       <div className="flex-grow bg-background pb-[2em] room-player-grid">
         <div className="room-player-video flex items-center justify-center">
