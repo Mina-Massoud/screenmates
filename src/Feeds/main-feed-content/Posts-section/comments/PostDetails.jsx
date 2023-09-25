@@ -92,17 +92,17 @@ const PostDetails = ({
 
   return (
     <div
-      className={`fixed w-full full-center overflow-y-auto bg-effect flex flex-col items-center pt-[4em] z-max min-h-[100vh]`}
+      className={`fixed min-h-[100vh] w-full full-center overflow-y-auto bg-effect flex flex-col items-center pt-[4em] z-max`}
     >
       <div className="mr-auto py-[2em]">
         <AiOutlineClose
           onClick={handleCloseEffect}
-          className="relative z-max left-[4em] top-[0em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
+          className="relative z-max left-[2em] top-[0em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
           size={20}
         />
       </div>
 
-      <div className="flex-grow comments-grid grid-rows-max-content">
+      <div className="flex-grow h-[100vh] comments-grid grid-rows-max-content">
         <div className="posts-cont col-start-2 md:mr-[2em]">
           <Post
             child={true}
