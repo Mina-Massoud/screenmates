@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext} from "react";
 import { io } from "socket.io-client";
 import GetUserName from "./getUserName";
 

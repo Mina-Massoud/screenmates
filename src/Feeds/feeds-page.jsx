@@ -30,7 +30,7 @@ const Feeds = (props) => {
             onClick={() => {
               setShowingPostDetails(false);
             }}
-            className="fixed cursor-pointer z-max border top-5 rounded-full p-[0.2em]"
+            className="fixed cursor-pointer z-max border top-[5em] rounded-full p-[0.2em]"
             size={25}
           />
         </>

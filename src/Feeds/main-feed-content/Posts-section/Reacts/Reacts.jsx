@@ -114,7 +114,7 @@ const Reacts = ({ id, reactType }) => {
         setFlagHover(true);
       }}
       onTouchStart={() => {
-        // setFlagHover(true);
+        setFlagHover(true);
       }}
       className={`flex animate__animated z-[9999999] animate__bounceIn reacts ${
         showReacts && "reacts-hover"

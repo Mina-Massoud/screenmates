@@ -36,7 +36,9 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
 
   useEffect(() => {
     axios
-      .get(`https://screenmates-beta-v.onrender.com/posts/${id}?req=${GetUserName()}`) // Pass an object with key-value pairs
+      .get(
+        `https://screenmates-beta-v.onrender.com/posts/${id}?req=${GetUserName()}`
+      ) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
         setData(response.data[0]);
@@ -100,11 +102,11 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
       {closeSelf && (
         <AiOutlineClose
           onClick={handleCloseEffect}
-          className="absolute left-[1em] top-[1em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
+          className="absolute left-[1em] top-[4em] bg-white cursor-pointer text-black rounded-full p-[0.1em]"
           size={20}
         />
       )}
-      <div className="flex-grow fixed comments-grid grid-rows-max-content">
+      <div className="flex-grow my-[5em] fixed comments-grid grid-rows-max-content">
         <div className="posts-cont col-start-2 md:mr-[2em]">
           <Post
             child={true}

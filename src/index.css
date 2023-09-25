@@ -316,7 +316,6 @@ body {
 }
 .room-chat-video-mini {
   grid-column: 3 / -1;
-  margin-right: 2em;
 }
 .room-chat-video {
   grid-column: 3 / -1;
@@ -332,7 +331,6 @@ body {
 @media (max-width: 1200px) {
   .room-chat-video-mini {
     grid-column: 1/-1;
-    margin: 0em 2em;
   }
   .inputs-room-mp-play {
     display: none;
