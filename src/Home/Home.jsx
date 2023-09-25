@@ -77,10 +77,6 @@ const Home = (props) => {
           Feeling bored? Join any Room Now and{" "}
           <span className="main-text-gradient-color">make new friends!</span>
           <br />
-          <span className="">
-            من الاخر لو معندكش صحاب استخدم
-            <span className="main-text-gradient-color"> البتاع دا</span>
-          </span>
         </h1>
         <h2 className="rooms-main-section-title text-[2rem] font-black">
           Live Rooms{" "}

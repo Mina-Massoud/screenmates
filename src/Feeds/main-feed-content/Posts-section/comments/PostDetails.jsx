@@ -110,7 +110,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
           />
         </div>
       )}
-      <div className="flex-grow fixed top-[6em] comments-grid grid-rows-max-content">
+      <div className="flex-grow fixed top-[8em] comments-grid grid-rows-max-content">
         <div className="posts-cont col-start-2 md:mr-[2em]">
           <Post
             child={true}
