@@ -19,27 +19,31 @@ const Feeds = (props) => {
   }
 
   return (
-    <>
+    <div className="mt-[5.5em] mx-[0.5em] max-h-[100vh] flex-grow flex">
       {showingPostDetails && (
         <>
           <PostDetails
             sendReactToParentFeeds={sendReactToParentFeeds}
             id={showingPostDetails}
-            ParentShowingPostHandler={ParentShowingPostHandler}
+          />
+          <AiOutlineClose
+            onClick={() => {
+              setShowingPostDetails(false);
+            }}
+            className="fixed cursor-pointer z-max border top-5 rounded-full p-[0.2em]"
+            size={25}
           />
         </>
       )}
-      <div className="mt-[5.5em] mx-[0.5em] max-h-[100vh] flex-grow flex">
-        <div className="main-feed-grid max-h-[91vh] flex-grow">
-          <LeftFeedSide />
-          <Mainfeed
-            ParentShowingPostHandler={ParentShowingPostHandler}
-            forceRender={forceRender}
-          />
-          <FriendsSide />
-        </div>
+      <div className="main-feed-grid max-h-[91vh] flex-grow">
+        <LeftFeedSide />
+        <Mainfeed
+          ParentShowingPostHandler={ParentShowingPostHandler}
+          forceRender={forceRender}
+        />
+        <FriendsSide />
       </div>
-    </>
+    </div>
   );
 };
 
