@@ -44,7 +44,6 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
   
-  throw new Response("Bad Request", { status: 400 });
 
   return (
     <>
