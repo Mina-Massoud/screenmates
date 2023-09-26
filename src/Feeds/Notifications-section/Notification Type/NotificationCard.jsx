@@ -11,7 +11,8 @@ import NotificationFriendAccepted from "./NotificationFriendAccepted";
 import NotificationReact from "./NotificationReact";
 import NotficationsComment from "./NotificationComment";
 import { useLocation } from "react-router-dom";
-const NotificationCard = ({ parent = false, data }) => {
+
+const NotificationCard = ({ parent = false, data, deleteNotification }) => {
   const [hover, setHover] = useState(false);
   const [close, setClose] = useState(false);
   const [closeEffect, setCloseEffect] = useState(false);
@@ -48,12 +49,18 @@ const NotificationCard = ({ parent = false, data }) => {
 
   const pathType = data.postId ? "post" : "profile";
 
+  function handleRemoveNotification() {
+    setCloseEffect(true);
+    setCloseHandler();
+    deleteNotification(data._id);
+  }
+  console.log(data);
   return (
     <Link
       to={
         pathType === "post"
           ? `/feeds/post/${data.postId}`
-          : `/profile/${data.userData.userName}`
+          : `/profile/${data.causativeUser}`
       }
       state={pathname}
       onMouseOver={() => {
@@ -74,8 +81,7 @@ const NotificationCard = ({ parent = false, data }) => {
         <AiFillCloseCircle
           className="ml-auto mb-[0.5em] cursor-pointer"
           onClick={() => {
-            setCloseEffect(true);
-            setCloseHandler();
+            handleRemoveNotification();
           }}
           size={17}
         />

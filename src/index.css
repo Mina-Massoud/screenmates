@@ -105,6 +105,11 @@ button:focus-visible {
 body {
   background-color: black;
 }
+@media (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
 .land-bg {
   background-image: url(../src/media/landBg.jpg);
   background-size: cover;
@@ -407,7 +412,7 @@ body {
     padding: 0;
   }
   .room-player-grid {
-    grid-template-rows: minmax(100px, 200px) auto;
+    /* grid-template-rows: minmax(100px, 200px) auto; */
     grid-auto-rows: auto;
     grid-template-columns: minmax(1em, 1fr) minmax(250px, 600px) minmax(
         1em,
@@ -452,6 +457,9 @@ body {
   display: none;
 }
 @media (max-width: 900px) {
+  .profile-bar { 
+    width: 100%;
+  }
   .drop-show {
     transform: translateX(-100%);
     gap: 20px;

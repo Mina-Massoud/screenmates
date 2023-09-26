@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Notification from "../notifications";
 import NotificationCard from "../Notification Type/NotificationCard";
 import classNames from "classnames";
 import { useState } from "react";
 import axios from "axios";
 import GetUserName from "../../../APIS/getUserName";
-const NotificationPage = ({ className, notification }) => {
+import notificationSound from "../../../media/sounds/notification.wav";
+
+const NotificationPage = ({ className, notification, socket , deleteNotification }) => {
   const [notificationFetching, setNotificationFetching] = useState();
 
   console.log(notificationFetching);
@@ -34,16 +36,33 @@ const NotificationPage = ({ className, notification }) => {
     return;
   }
 
+  useEffect(() => {
+    if (socket) {
+      const notificationSoundAudio = new Audio(notificationSound);
+      notificationSoundAudio.play();
+    }
+  }, []);
+
   return (
     <div className={className}>
       <div className="w-full px-[0.5em] bg-[#111111] mx-auto rounded-lg flex flex-col py-[0.5em] gap-[5px]">
         {notification
           ? notification.map((child) => (
-              <NotificationCard key={child._id} data={child} parent={true} />
+              <NotificationCard
+                deleteNotification={deleteNotification}
+                key={child._id}
+                data={child}
+                parent={true}
+              />
             ))
           : notificationFetching && notificationFetching.notificationsData
           ? notificationFetching.notificationsData.map((child) => (
-              <NotificationCard key={child._id} data={child} parent={true} />
+              <NotificationCard
+                deleteNotification={deleteNotification}
+                key={child._id}
+                data={child}
+                parent={true}
+              />
             ))
           : null}{" "}
         {/* Return null instead of an empty string */}

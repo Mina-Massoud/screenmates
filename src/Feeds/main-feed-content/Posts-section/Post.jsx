@@ -22,7 +22,7 @@ const Post = ({
   const [showListButton, setShowListButton] = useState(
     data.publisher === GetUserName()
   );
-  console.log("rendered");
+
   const [isPostDeleted, setIsPostDeleted] = useState();
   const [isPostEdited, setIsPostEdited] = useState();
   const [showDropDownList, setshowDropDownList] = useState(false);
@@ -50,14 +50,12 @@ const Post = ({
   }
 
   function onCancel(param) {
-    console.log(param);
     setIsPostEdited(false);
     if (param) {
       data.caption = param;
     }
   }
 
-  console.log(data.caption);
 
   return (
     <>

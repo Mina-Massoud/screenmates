@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Thunder from "../../../../media/Reacts/Thunder.gif";
 import Amazing from "../../../../media/Reacts/Amazing.gif";
 import Dislike from "../../../../media/Reacts/dislike.gif";
@@ -12,9 +12,21 @@ import "animate.css";
 import axios from "axios";
 import GetUserName from "../../../../APIS/getUserName";
 import ReactStyle from "../../../../helperalgo/ReactsStyle";
+import { LayoutContext } from "../../../../Layout/Layout";
 const Reacts = ({ id, reactType }) => {
   const [showReacts, setShowReacts] = useState(false);
   const [flagHover, setFlagHover] = useState(false);
+  const hideReacts = useContext(LayoutContext);
+
+  useEffect(() => {
+    console.log("entered");
+    if (hideReacts.hideChild) {
+      console.log("s");
+      setShowReacts(false);
+      hideReacts.hideChildHandler(false);
+    }
+  }, [hideReacts.hideChild]);
+
   const ReactImges = {
     Thunder,
     Amazing,
@@ -109,7 +121,7 @@ const Reacts = ({ id, reactType }) => {
         ImgSrc: empty,
         activeColor: "bg-transparent",
       });
-      setShowReacts(false)
+      setShowReacts(false);
       return 0;
     }
     const target = event.target;

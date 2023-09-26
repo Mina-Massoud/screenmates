@@ -11,6 +11,7 @@ import GetUserName from "../../APIS/getUserName";
 import ProfilePost from "./Profile-details-type/ProfilePost";
 import PostDetails from "../main-feed-content/Posts-section/comments/PostDetails";
 import { AiOutlineClose } from "react-icons/ai";
+import { data } from "autoprefixer";
 const ProfilePage = (props) => {
   const [userData, setUserData] = useState();
   const [coverImg, setCoverImg] = useState();
@@ -268,6 +269,8 @@ const ProfilePage = (props) => {
     setFilter(data);
   }
 
+  console.log(userData);
+
   return (
     <>
       {showingPostDetails && (
@@ -309,7 +312,7 @@ const ProfilePage = (props) => {
           )}
         </div>
         <div className="edit-user-info">
-          {userNameURL !== CurrentUser ? (
+          {userNameURL !== CurrentUser && (
             <button
               onClick={requestHandle}
               className={`border px-[2.5em] ${
@@ -325,10 +328,6 @@ const ProfilePage = (props) => {
                 : !AddFriend
                 ? "Add friend"
                 : "Friend request is sent"}
-            </button>
-          ) : (
-            <button className="border px-[2.5em] py-[0.6em] transition mt-[2.5em] duration-300 rounded-full hover:bg-white hover:text-black">
-              Edit Info
             </button>
           )}
         </div>
@@ -353,6 +352,7 @@ const ProfilePage = (props) => {
               {userData.firstName} {userData.lastName}
             </h1>
             <p>{userData.friends && userData.friends.length} Friends</p>
+            <p className="text-gray-500">{userData.userName}</p>
           </div>
         </div>
         <div className="profile-bar py-[1.5em] border-t border-gray-700">

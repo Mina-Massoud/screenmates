@@ -21,8 +21,10 @@ const Mainfeed = ({
 }) => {
   const [posts, setPosts] = useState([]);
   const pageNumber = useRef(0);
+  const firstRender = useRef(1);
+  console.log(firstRender);
   const [hasMoreState, setHasMoreState] = useState(true);
-  const test = useRef();
+  const scrollableDiv = useRef();
   function sendPostToParentHandle(data) {
     if (posts.length > 0) {
       setPosts((prevPosts) => [data, ...prevPosts]);
@@ -36,7 +38,7 @@ const Mainfeed = ({
   }
 
   const fetchData = () => {
-    console.log("enterdsss");
+    console.log("fetching");
     // Get posts based on the profile and filter values
     // Example usage of pageNumber
     pageNumber.current = pageNumber.current + 1;
@@ -52,10 +54,12 @@ const Mainfeed = ({
       .get(apiUrl)
       .then(function (response) {
         // handle success
+        console.log(response);
         if (!response.data.length) {
           setHasMoreState(false);
           return;
         }
+
         setPosts((prev) => [...prev, ...response.data]);
       })
       .catch(function (error) {
@@ -64,9 +68,16 @@ const Mainfeed = ({
       });
   };
 
+  // useEffect(() => {
+  //   fetchData(); // Fetch initial data
+  // }, []);
+
   useEffect(() => {
-    fetchData(); // Fetch initial data
-  }, [forceRender, filter, userNameURL, profile]);
+    console.log("bec  0");
+    pageNumber.current = 0;
+    setPosts([]);
+    fetchData();
+  }, [filter, userNameURL]);
 
   // useEffect(() => {
   //   //get posts
@@ -107,7 +118,7 @@ const Mainfeed = ({
   return (
     <div
       id={!profile && "scrollableDiv"}
-      ref={test}
+      ref={scrollableDiv}
       className="overflow-handle home-side  posts-section"
     >
       <InfiniteScroll
