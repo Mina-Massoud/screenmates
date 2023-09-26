@@ -38,10 +38,27 @@ export default function App() {
   const router = createHashRouter(
     createRoutesFromElements(
       <>
-        <Route path="/start" element={<LandPage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Layout />} loader={auth}>
+        <Route
+          path="/start"
+          errorElement={<ErrorPageHandle />}
+          element={<LandPage />}
+        />
+        <Route
+          path="/register"
+          errorElement={<ErrorPageHandle />}
+          element={<Register />}
+        />
+        <Route
+          path="/login"
+          errorElement={<ErrorPageHandle />}
+          element={<Login />}
+        />
+        <Route
+          path="/"
+          errorElement={<ErrorPageHandle />}
+          element={<Layout />}
+          loader={auth}
+        >
           <Route index element={<Home />} />
           <Route path="rooms" element={<RoomType />} />
           <Route path="chat" element={<ChatSection />} />
@@ -49,21 +66,13 @@ export default function App() {
           <Route path="chat/chat-connected" element={<Chat />} />
           <Route path="profile/:id" element={<ProfilePage />} />
           <Route path="contact" element={<Contact />} />
-          <Route
-            path="/feeds"
-            element={<FeedsLayout />}
-            errorElement={<ErrorPageHandle />}
-          >
+          <Route path="/feeds" element={<FeedsLayout />}>
             <Route key="feeds" index element={<Feeds />} />
             <Route path="post/:id" element={<PostDetails />} />
             <Route path="notification" element={<NotificationPage />} />
             <Route path="friends" element={<FriendPage />} />
           </Route>
-          <Route
-            path="*"
-            errorElement={<ErrorPageHandle />}
-            element={<ErrorPageHandle />}
-          />
+          <Route path="*" element={<ErrorPageHandle />} />
         </Route>
       </>
     )

@@ -150,6 +150,7 @@ const RoomPlay = (props) => {
       // }, 1000);
     }
   }
+  throw new Response("Bad Request", { status: 400 });
 
   // Function to get YouTube video ID from a URL
   function getYouTubeVideoId(link) {

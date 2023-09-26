@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { SocketContext } from "../APIS/SocketContext";
-const RoomTypeCard = ({ image, name , ready}) => {
+const RoomTypeCard = ({ image, name, ready }) => {
   let navigate = useNavigate();
   const socket = useContext(SocketContext);
   const [clickable, setClickable] = useState(true);
@@ -15,8 +15,8 @@ const RoomTypeCard = ({ image, name , ready}) => {
 
   async function handleRoomPrivteCreate() {
     setClickable(false);
-     socket.emit("create_room");
-     socket.on("room_created", handleRoomConnect);
+    socket.emit("create_room");
+    socket.on("room_created", handleRoomConnect);
   }
 
   console.log(ready);
@@ -26,13 +26,15 @@ const RoomTypeCard = ({ image, name , ready}) => {
       {image || name ? (
         <button
           ref={createRoomBtn}
-          onClick={()=>{clickable && handleRoomPrivteCreate()}}
-          disabled = {!ready && true}
-          className={`room-type p-[2em] flex items-center justify-center ${
-            !name
-              ? "bg-[#ff000000]"
-              : "bg-[#ffffff12]"
-          } transition duration-300 ${!clickable && "cursor-not-allowed"} ${!ready && "bg-[#6a6a6a] cursor-not-allowed"} ${ready && "transform-effect"} rounded-lg `}
+          onClick={() => {
+            clickable && handleRoomPrivteCreate();
+          }}
+          disabled={!ready && true}
+          className={`room-type ${
+            !ready ? "cursor-not-allowed bg-[#888888]" : "transform-effect bg-[#ffffff14]"
+          } p-[2em] flex items-center justify-center transition duration-300 ${
+            !clickable && "cursor-not-allowed"
+          }  rounded-lg `}
         >
           {image ? (
             <img className="w-[200px]" src={image} alt="" />

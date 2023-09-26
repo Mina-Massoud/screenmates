@@ -146,7 +146,7 @@ body {
 }
 
 .contact-bg {
-  background-image: url(../src/media/contact-bg.png);
+  background-image: url(../src/media/contact-bg.jpg);
   background-size: cover;
   background-position: center;
   background-color: #050505c9;
@@ -197,9 +197,7 @@ body {
   .img-title {
     display: none;
   }
-  .buttons {
-    justify-content: center;
-  }
+
   .footer-test-item {
     grid-column: 2;
   }

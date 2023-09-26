@@ -43,6 +43,8 @@ const Login = () => {
     passwordInput.current.type = inputType;
     setShowPassword(!showPassword);
   };
+  
+  throw new Response("Bad Request", { status: 400 });
 
   return (
     <>

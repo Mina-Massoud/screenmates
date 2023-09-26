@@ -36,6 +36,8 @@ const ProfilePage = (props) => {
     }
   }, []);
 
+  throw new Response("Bad Request", { status: 400 });
+  
   useEffect(() => {
     setUserNameURL(param.id);
   }, [param.id]);

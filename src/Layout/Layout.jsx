@@ -74,7 +74,7 @@ const Layout = (props) => {
         >
           <Header setShowParent={setShowParent} StopSearch={StopSearch} />
           <Outlet />
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </LayoutContext.Provider>
     </>
