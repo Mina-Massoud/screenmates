@@ -15,18 +15,15 @@ const Login = () => {
 
   const handleLogin = () => {
     if (!loginData.userName || !loginData.password) {
-      if (!loginData.userName) { 
-        if (!loginData.password) { 
-          setError("Username and Password are required fields")
-        }
-        else
-        setError("Username is required field")
-      }
-      else {
-        setError("Password is required field")
+      if (!loginData.userName) {
+        if (!loginData.password) {
+          setError("Username and Password are required fields");
+        } else setError("Username is required field");
+      } else {
+        setError("Password is required field");
       }
 
-      return
+      return;
     }
     axios
       .post("https://screenmates-beta-v.onrender.com/login/", loginData)
@@ -67,7 +64,10 @@ const Login = () => {
             required
             name="userName"
             onChange={(event) =>
-              setLoginData({ ...loginData, [event.target.name]: event.target.value })
+              setLoginData({
+                ...loginData,
+                [event.target.name]: event.target.value,
+              })
             }
           />
           <div className="password relative reg-password">
@@ -79,17 +79,27 @@ const Login = () => {
               placeholder="Password"
               name="password"
               onChange={(event) =>
-                setLoginData({ ...loginData, [event.target.name]: event.target.value })
+                setLoginData({
+                  ...loginData,
+                  [event.target.name]: event.target.value,
+                })
               }
             />
-            <button onClick={handleShowPassword} className="absolute center-v right-[30px]">
-              {showPassword ? <AiFillEye size={25} /> : <AiFillEyeInvisible size={25} />}
+            <button
+              onClick={handleShowPassword}
+              className="absolute center-v right-[30px]"
+            >
+              {showPassword ? (
+                <AiFillEye size={25} />
+              ) : (
+                <AiFillEyeInvisible size={25} />
+              )}
             </button>
           </div>
           <button
             type="submit"
             onClick={handleLogin}
-            className="reg-button border mr-[0.5em] rounded-full p-[1em] hover:bg-white hover:text-black transition duration-300"
+            className="reg-button main-text-gradient-background mr-[0.5em] rounded-full p-[1em]  transition duration-300"
           >
             Login
           </button>

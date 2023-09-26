@@ -15,8 +15,6 @@ import FeedsLayout from "./Layout/FeedsLayout";
 import ChatSection from "./Chat-section/ChatSection";
 import Chat from "./Chat-section/Chat";
 import ProfilePage from "./Feeds/Profile/ProfilePage";
-import ProfileImages from "./Feeds/Profile/Profile-details-type/Profile-images";
-import ProfileVideos from "./Feeds/Profile/Profile-details-type/Profile-videos";
 import LandPage from "./landPage";
 import { auth } from "./APIS/auth";
 import Register from "./Start-Screenmate/Register";
@@ -25,6 +23,7 @@ import Contact from "./Contact/Contact";
 import NotificationPage from "./Feeds/Notifications-section/NotificationPage.jsx/NotificationPage";
 import FriendPage from "./Feeds/friends-section/FriendPage";
 import PostDetails from "./Feeds/main-feed-content/Posts-section/comments/PostDetails";
+import ErrorPageHandle from "./ErrorHandlers/ErrorPage";
 
 export default function App() {
   console.log(
@@ -50,12 +49,21 @@ export default function App() {
           <Route path="chat/chat-connected" element={<Chat />} />
           <Route path="profile/:id" element={<ProfilePage />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="/feeds" element={<FeedsLayout />}>
+          <Route
+            path="/feeds"
+            element={<FeedsLayout />}
+            errorElement={<ErrorPageHandle />}
+          >
             <Route key="feeds" index element={<Feeds />} />
             <Route path="post/:id" element={<PostDetails />} />
             <Route path="notification" element={<NotificationPage />} />
             <Route path="friends" element={<FriendPage />} />
           </Route>
+          <Route
+            path="*"
+            errorElement={<ErrorPageHandle />}
+            element={<ErrorPageHandle />}
+          />
         </Route>
       </>
     )

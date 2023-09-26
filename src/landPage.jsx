@@ -8,20 +8,21 @@ const LandPage = (props) => {
   const [showButtons, setShowButtons] = useState(false);
 
   return (
-    <div className="flex-grow pt-[12em] pb-[3em] land-bg land-page font-black text-white">
+    <div className="flex-grow pt-[6em] pb-[3em] land-bg land-page font-black text-white">
       <section className="main-grid">
         <div className="home-title">
           <div className="home-main-title">
             {/* Main title */}
-            <h1 className="text-[2rem] animate__animated animate__zoomIn sm:text-[3rem] font-black">
-              <span className="main-text-gradient-color main-title-span">
+            <h1 className="text-[2rem] animate__animated animate__zoomIn sm:text-[1.2rem] font-black">
+              <span className="main-text-gradient-color text-[3rem] md:text-[5rem] main-title-span">
                 Screenmates
               </span>{" "}
+              <br />
               Your Gateway to Social Fun and Activities!
             </h1>
           </div>
           {/* Description */}
-          <p className="transparent-color my-[2em] text-[1.3rem] mb-[5em]">
+          <p className="transparent-color my-[2em] font-normal text-[1.3rem] mb-[5em]">
             Where Social Media Meets Real-Time Fun! Join our vibrant community
             for interactive activities and shared virtual experiences. Connect,
             play, and engage like never before!
@@ -41,17 +42,17 @@ const LandPage = (props) => {
       <Element className="rooms-available rooms-flow-grid">
         <h1 className="text-center border-t border-[#7a326d] letter-space py-[1em] mt-[2em] font-black rooms-title text-[2rem]">
           Why We Build{" "}
-          <span className="main-text-gradient-color">Screenmate</span>{" "}
+          <span className="main-text-gradient-color">Screenmate?</span>{" "}
         </h1>
         <div className="col-start-2 about-page col-end-4">
           {/* Vision and purpose */}
-          <h2 className="text-[2rem] line-height border-b border-[#7a326d] pb-[3em]">
+          <h2 className="text-[2rem] line-height border-b font-normal  border-[#7a326d] pb-[3em]">
             {" "}
             Our vision was to create a platform where users could not only
             connect through messages and posts but also share immersive
             experiences in real-time.
           </h2>
-          <p className="text-[1.5rem] my-[1.3em]">
+          <p className="text-[1.5rem] my-[1.3em]  font-normal">
             We wanted to break the barriers of traditional social networks and
             offer a space where individuals could interact, play, and
             collaborate in virtual rooms, just like in real life.

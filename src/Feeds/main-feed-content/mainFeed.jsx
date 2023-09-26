@@ -51,7 +51,7 @@ const Mainfeed = ({
       : `https://screenmates-beta-v.onrender.com/feed/${userNameURL}?offset=${pageNumber}&limit=${10}`;
 
     axios
-      .get(apiUrl)
+      .get(apiUrl, { withCredentials: true })
       .then(function (response) {
         // handle success
         console.log(response);

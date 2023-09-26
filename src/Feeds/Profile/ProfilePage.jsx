@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import defaultCoverImg from "../../media/defaultCoverImg.jpg";
 import ProfileBar from "./ProfileBar";
-import { Outlet } from "react-router-dom";
 import ReactLoading from "react-loading";
 import axios from "axios";
 import defaultProfilePic from "../../media/defaultProfilePic.jpg";
@@ -11,7 +10,6 @@ import GetUserName from "../../APIS/getUserName";
 import ProfilePost from "./Profile-details-type/ProfilePost";
 import PostDetails from "../main-feed-content/Posts-section/comments/PostDetails";
 import { AiOutlineClose } from "react-icons/ai";
-import { data } from "autoprefixer";
 const ProfilePage = (props) => {
   const [userData, setUserData] = useState();
   const [coverImg, setCoverImg] = useState();

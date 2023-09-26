@@ -1,15 +1,15 @@
 import { redirect } from "react-router-dom";
 // import Cookies from "js-cookie";
-
 export function auth() {
-  // Cookies.remove("token")
-  // localStorage.clear();
-  return true
 
-  const token = Cookies.get("token");
-  console.log(token);
-  if (!token) {
-    throw redirect("/start");
-  }
+  return true;
+  // if (cookies) {
+  //   console.log(cookies);
+  //   return true;
+  // }
+
+  // if (!token) {
+  //   throw redirect("/start");
+  // }
   return null;
 }

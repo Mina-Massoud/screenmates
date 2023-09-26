@@ -113,8 +113,17 @@ body {
 .land-bg {
   background-image: url(../src/media/landBg.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
-  background-color: #0e0e0ec9;
+  background-color: #0e0e0edd;
+  background-blend-mode: darken;
+}
+.error-bg {
+  background-image: url(../src/media/error-bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #0e0e0ef3;
   background-blend-mode: darken;
 }
 .reg-bg {
@@ -222,7 +231,7 @@ body {
   grid-template-columns:
     minmax(1em, 1fr) minmax(250px, 500px) minmax(250px, 500px)
     minmax(1em, 1fr);
-  column-gap: 2em;
+  column-gap: 1em;
   row-gap: 3em;
 }
 
@@ -273,7 +282,7 @@ body {
         1em,
         1fr
       );
-    column-gap: 2em;
+    column-gap: 1em;
     row-gap: 3em;
   }
 
@@ -457,7 +466,7 @@ body {
   display: none;
 }
 @media (max-width: 900px) {
-  .profile-bar { 
+  .profile-bar {
     width: 100%;
   }
   .drop-show {

@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { IoIosRemoveCircleOutline} from "react-icons/io";
-import { IoChevronBackOutline } from "react-icons/io5"
+import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { IoChevronBackOutline } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -38,7 +38,7 @@ const Register = () => {
 
     return myCropWidget;
   };
-  
+
   const myCropWidget = useRef();
 
   useEffect(() => {
@@ -158,7 +158,7 @@ const Register = () => {
             </button>
           </div>
           <div className="relative reg-button min-w-[250px]">
-            <label className="p-[1em] block w-full reg-input cursor-pointer text-center">
+            <label className="p-[1em] block w-full reg-input hover:bg-white hover:text-black transition duration-300 cursor-pointer text-center">
               {!isImgSelected ? "Upload Image" : "Image Selected"}
               <button onClick={openWidget} />
             </label>
@@ -173,7 +173,7 @@ const Register = () => {
 
           <button
             onClick={handleRegister}
-            className="reg-button border rounded-full mr-[0.5em] p-[1em] hover:bg-white hover:text-black transition duration-300"
+            className="reg-button main-text-gradient-background rounded-full mr-[0.5em] p-[1em]  transition duration-300"
           >
             Register
           </button>
