@@ -14,7 +14,7 @@ const About = ({ aboutData, options }) => {
   }
   function handleConfirmEdit() {
     axios
-      .put(`http://localhost:8000/users/${GetUserName()}`, {
+      .put(`https://screenmates-beta-v.onrender.com/${GetUserName()}`, {
         userDescription: AboutInput.current.value,
       })
       .then((response) => {
