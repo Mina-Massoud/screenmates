@@ -43,42 +43,35 @@ const Mainfeed = ({
     // Example usage of pageNumber
     pageNumber.current = pageNumber.current + 1;
     console.log("Updated pageNumber:", pageNumber.current);
-    const storedCookie = localStorage.getItem("token"); // Replace 'yourCookieName' with the actual cookie name
-    console.log(storedCookie);
-    if (storedCookie) {
-      // Step 2: Include the cookie in the headers of your HTTP request
-      const headers = {
-        Cookie: storedCookie, // Include the cookie in the "Cookie" header
-      };
+    // Step 2: Include the cookie in the headers of your HTTP request
 
-      const apiUrl = profile
-        ? `https://screenmates-beta-v.onrender.com/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}&offset=${
-            pageNumber.current
-          }&limit=${10}`
-        : `https://screenmates-beta-v.onrender.com/feed/${userNameURL}?offset=${pageNumber}&limit=${10}`;
+    const apiUrl = profile
+      ? `https://screenmates-beta-v.onrender.com/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}&offset=${
+          pageNumber.current
+        }&limit=${10}`
+      : `https://screenmates-beta-v.onrender.com/feed/${userNameURL}?offset=${pageNumber}&limit=${10}`;
 
-      axios
-        .get(apiUrl, { headers })
-        .then(function (response) {
-          // handle success
-          console.log(response);
-          if (!response.data.length) {
-            setHasMoreState(false);
-            return;
-          }
+    axios
+      .get(apiUrl)
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        if (!response.data.length) {
+          setHasMoreState(false);
+          return;
+        }
 
-          setPosts((prev) => [...prev, ...response.data]);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        });
-    }
+        setPosts((prev) => [...prev, ...response.data]);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   };
 
-  // useEffect(() => {
-  //   fetchData(); // Fetch initial data
-  // }, []);
+  useEffect(() => {
+    fetchData(); // Fetch initial data
+  }, [pageNumber]);
 
   useEffect(() => {
     console.log("bec  0");
