@@ -10,7 +10,9 @@ const RoomTypeCard = ({ image, name, ready }) => {
   const createRoomBtn = useRef(null);
 
   function handleRoomConnect(data) {
-    navigate(`/room-player?private=true&roomId=${data}`);
+    console.log(data);
+    navigate(`/room-player?private=true&roomId=${data.roomID}`);
+    localStorage.setItem("owner", data.owner);
   }
 
   async function handleRoomPrivteCreate() {
@@ -31,7 +33,9 @@ const RoomTypeCard = ({ image, name, ready }) => {
           }}
           disabled={!ready && true}
           className={`room-type ${
-            !ready ? "cursor-not-allowed bg-[#888888]" : "transform-effect bg-[#ffffff14]"
+            !ready
+              ? "cursor-not-allowed bg-[#888888]"
+              : "transform-effect bg-[#ffffff14]"
           } p-[2em] flex items-center justify-center transition duration-300 ${
             !clickable && "cursor-not-allowed"
           }  rounded-lg `}

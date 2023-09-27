@@ -6,6 +6,7 @@ import { SocketContext } from "../APIS/SocketContext";
 import { useSearchParams } from "react-router-dom";
 // import copy from "clipboard-copy";
 import "animate.css";
+import GetUserName from "../APIS/getUserName";
 
 const RoomPlay = (props) => {
   // State for rendering
@@ -21,6 +22,11 @@ const RoomPlay = (props) => {
   const [isVideoStarted, setIsVideoStarted] = useState(false);
   const [currenttime, setCurrentTime] = useState(false);
   const [userJoined, setUserIsJoined] = useState(false);
+  const [isOwner, setIsOwner] = useState(
+    localStorage.getItem("owner") === GetUserName()
+  );
+  const [pausedFromOnwer, setPausedFromOnwer] = useState(false);
+  const [videoTime, setVideoTime] = useState();
   // Function to copy the parameter to the clipboard
   const copyToClipboard = (roomID) => {
     copy(roomID);
@@ -45,9 +51,10 @@ const RoomPlay = (props) => {
       setSearchData(URLData);
     });
 
-    socket.on("userJoined", (userID) => {
+    socket.on("userJoined", (data) => {
       setUserIsJoined(true);
-      handleSharedDetails(userID);
+      setIsOwner(data.owner === GetUserName());
+      handleSharedDetails(data.socketId);
     });
 
     // Handle video started event
@@ -58,8 +65,15 @@ const RoomPlay = (props) => {
       handleSeekTo(Time);
     });
 
+    socket.on("setVideoTime", ({ videoTime }) => {
+      console.log(videoTime);
+      setVideoTime(videoTime);
+      handleSeekTo(videoTime);
+    });
+
     // Handle video paused event
     socket.on("video_paused_to", () => {
+      setPausedFromOnwer(true);
       playerRef.current.pauseVideo();
     });
 
@@ -72,6 +86,8 @@ const RoomPlay = (props) => {
       socket.off("userJoined");
     };
   }, [SearchData]);
+
+  console.log(videoTime);
 
   useEffect(() => {
     if (isReady) {
@@ -91,21 +107,25 @@ const RoomPlay = (props) => {
     }
   };
 
-  // Function to handle video pause
+  // Function to handle video paused
   function handleOnPause() {
+    if (!isOwner) {
+      playerRef.current.playVideo();
+      return 0;
+    }
     socket.emit("video_paused", roomId);
   }
-  console.log("STARTEEEEEEEEEEEEEEED ", isVideoStarted);
 
   // Function to handle video play
   function handleOnPlay(event) {
-    console.log("entered");
     setIsVideoStarted(true);
     if (canIEmit) {
-      socket.emit("video_started", {
-        roomId,
-        currentTime: event.target.getCurrentTime(),
-      });
+      if (!videoTime) {
+        socket.emit("video_started", {
+          roomId,
+          currentTime: event.target.getCurrentTime(),
+        });
+      }
     } else {
       setCanIemit(true);
     }
@@ -164,6 +184,13 @@ const RoomPlay = (props) => {
     setSrcVideo(String(getYouTubeVideoId(Data)));
   }
 
+  const videoOpts = {
+    playerVars: {
+      controls: 0, // Disable player controls
+      disablekb: 1, // Disable keyboard control (pause/play)
+    },
+  };
+
   return (
     <div className="animate__animated animate__zoomIn mt-[1.5em]">
       <div className="flex w-full px-[2em] mt-[6em] items-center">
@@ -191,24 +218,40 @@ const RoomPlay = (props) => {
         </button> */}
       </div>
       <div className="flex-grow bg-background pb-[2em] room-player-grid">
-        <div className="room-player-video flex items-center justify-center">
+        <div className="room-player-video relative flex items-center justify-center">
           {SrcVideo ? (
-            <YouTube
-              className="w-full h-full"
-              videoId={SrcVideo}
-              iframeClassName={"w-full h-full"}
-              onPause={(event) => {
-                handleOnPause();
-                event.preventDefault();
-              }}
-              onPlay={handleOnPlay}
-              onReady={(event) => {
-                // Access the player instance via event.target
-                playerRef.current = event.target;
-                handleOnReady();
-                setIsReady(true);
-              }}
-            />
+            <>
+              <YouTube
+                className="w-full h-full"
+                videoId={SrcVideo}
+                iframeClassName={"w-full h-full"}
+                onPause={(event) => {
+                  if (!pausedFromOnwer) {
+                    handleOnPause();
+                  }
+                  setPausedFromOnwer(false);
+                  event.preventDefault();
+                }}
+                // opts={!isOwner && videoOpts}
+                onPlay={handleOnPlay}
+                onReady={(event) => {
+                  // Access the player instance via event.target
+                  playerRef.current = event.target;
+                  handleOnReady();
+                  setIsReady(true);
+                }}
+              />
+
+              {/* <button
+                onClick={handleBackToLive}
+                disabled
+                className={`absolute ${
+                  isLive ? "bg-red-700" : "bg-gray-700"
+                }  text-white font-black px-[2em] py-[0.5em] text-[15px] top-[1em] right-[1em]`}
+              >
+                Live
+              </button> */}
+            </>
           ) : (
             <h1 className="text-[2rem] text-center font-black main-text-gradient-color">
               Your Video Should Shows Here
