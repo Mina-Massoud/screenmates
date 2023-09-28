@@ -14,7 +14,7 @@ const About = ({ aboutData, options }) => {
   }
   function handleConfirmEdit() {
     axios
-      .put(`${import.meta.env.VITE_PORT}/${GetUserName()}`, {
+      .put(`${import.meta.env.VITE_PORT}/users/${GetUserName()}`, {
         userDescription: AboutInput.current.value,
       })
       .then((response) => {

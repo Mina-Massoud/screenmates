@@ -11,12 +11,10 @@ const Header = ({ StopSearch, setShowParent }) => {
 
   // Use a flag to track whether it's the first render
   const isFirstRender = useRef(true);
-  console.log(isFirstRender.current);
 
   useEffect(() => {
     // Check if it's not the first render
     if (!isFirstRender.current) {
-      console.log("entered");
       setShowSearch(!StopSearch); // Invert the value of showSearch based on stopSearch
     } else {
       // If it's the first render, set the flag to false
@@ -24,7 +22,6 @@ const Header = ({ StopSearch, setShowParent }) => {
     }
   }, [StopSearch]);
 
-  console.log(showSearch, " sfasf");
   function handleSearchData(data) {
     setShowSearch(data);
     setShowParent(false);

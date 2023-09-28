@@ -69,13 +69,13 @@ const Home = (props) => {
           </div>
         </div>
         <div className="img-title">
-          <img src={ImgTitle} alt="" />
+          <img rel="preload" src={ImgTitle} alt="" />
         </div>
       </section>
       <Element className="rooms-available rooms-flow-grid">
         <h1 className="text-center py-[4em] font-black rooms-title text-[2rem]">
           Feeling bored? Join any Room Now and{" "}
-          <span className="main-text-gradient-color">make new friends!</span>
+          <span className="main-text-gradient-color">Make New Friends!</span>
           <br />
         </h1>
         <h2 className="rooms-main-section-title text-[2rem] font-black">
@@ -95,7 +95,7 @@ const Home = (props) => {
               <RoomCard key={Math.random()} data={item} />
             ))
           ) : (
-            <h1>No Rooms available at the moment...</h1>
+            <h1>No Rooms available at the moment</h1>
           )}
         </section>
       </Element>

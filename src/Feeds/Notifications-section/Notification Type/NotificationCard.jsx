@@ -29,7 +29,7 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
       closeDelay = setTimeout(() => {
         setCloseEffect(true);
         setCloseHandler();
-      }, 3000);
+      }, 10000);
     }
 
     return () => {
@@ -39,12 +39,9 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
 
   function setCloseHandler() {
     setTimeout(() => {
+      deleteNotification(data._id);
       setClose(true);
     }, 200);
-  }
-
-  if (close) {
-    return;
   }
 
   const pathType = data.postId ? "post" : "profile";
@@ -52,8 +49,8 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
   function handleRemoveNotification() {
     setCloseEffect(true);
     setCloseHandler();
-    deleteNotification(data._id);
   }
+
   return (
     <Link
       to={
@@ -79,7 +76,9 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
       >
         <AiFillCloseCircle
           className="ml-auto mb-[0.5em] cursor-pointer"
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault(); // Prevent navigation
+
             handleRemoveNotification();
           }}
           size={17}

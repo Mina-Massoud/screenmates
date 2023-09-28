@@ -19,9 +19,7 @@ const Reacts = ({ id, reactType }) => {
   const hideReacts = useContext(LayoutContext);
 
   useEffect(() => {
-    console.log("entered");
     if (hideReacts.hideChild) {
-      console.log("s");
       setShowReacts(false);
       hideReacts.hideChildHandler(false);
     }
@@ -93,24 +91,21 @@ const Reacts = ({ id, reactType }) => {
 
   function touchEnd() {
     if (Date.now() - startPress.current < delay) {
-      console.log("cancel holding");
       clearTimeout(touchTimeOut.current);
     }
   }
 
   function handleReactSelected(event) {
-    console.log(ReactSelected.ReactType);
-    if (ReactSelected.ReactType === event.target.name) {
+    if (ReactSelected.ReactType === event.target.name || ReactSelected.ReactType) {
       const ClickSoundEffect = new Audio(UnselectSound);
       ClickSoundEffect.volume = 0.6;
       ClickSoundEffect.play();
       axios
         .delete(
-          `${import.meta.env.VITE_PORT}/${id}/reacts?publisher=${GetUserName()}`
+          `${import.meta.env.VITE_PORT}/posts/${id}/reacts?publisher=${GetUserName()}`
         )
         .then((response) => {
           // Handle the response here
-          console.log(response);
         })
         .catch((error) => {
           // Handle errors here
@@ -140,7 +135,6 @@ const Reacts = ({ id, reactType }) => {
       })
       .then((response) => {
         // Handle the response here
-        console.log(response);
       })
       .catch((error) => {
         // Handle errors here
@@ -159,12 +153,7 @@ const Reacts = ({ id, reactType }) => {
   };
 
   return (
-    <div
-      className="z-max"
-      onClick={() => {
-        console.log("clikec");
-      }}
-    >
+    <div className="z-max">
       <div
         onMouseLeave={() => {
           setFlagHover(false);

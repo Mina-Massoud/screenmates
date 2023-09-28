@@ -11,8 +11,6 @@ const Comment = ({ data }) => {
     return;
   }
 
-  console.log("comments ", data);
-
   return (
     <div className="comment my-[2em] animate__animated animate__zoomIn items-center bg-[#282828] p-[1.2em] rounded-lg justify-between flex mx-[0.5em]">
       <p>{formatTimeAgo(data.publishDate)}</p>

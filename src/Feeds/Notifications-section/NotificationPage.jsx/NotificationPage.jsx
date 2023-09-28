@@ -10,8 +10,6 @@ import notificationSound from "../../../media/sounds/notification.wav";
 const NotificationPage = ({ className, notification, socket , deleteNotification }) => {
   const [notificationFetching, setNotificationFetching] = useState();
 
-  console.log(notificationFetching);
-
   className = classNames(
     `flex-grow flex flex-col ${
       notificationFetching && "pt-[6em]"

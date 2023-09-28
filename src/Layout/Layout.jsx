@@ -9,7 +9,6 @@ import { createPortal } from "react-dom";
 import NotificationPage from "../Feeds/Notifications-section/NotificationPage.jsx/NotificationPage";
 import { useEffect } from "react";
 
-
 const LayoutContext = createContext();
 
 const Layout = (props) => {
@@ -44,7 +43,14 @@ const Layout = (props) => {
 
   function deleteNotification(param) {
     console.log(param);
+    
+    const notificationFilter = notification.filter((child) => {
+      return child._id !== param;
+    });
+    
+    setNotification(notificationFilter);
   }
+
 
   const notificationPortal = createPortal(
     notification.length > 0 && (

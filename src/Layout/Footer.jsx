@@ -2,8 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Footer = (props) => {
+  // Get the fragment portion of the URL
+  const urlFragment = window.location.hash;
+
+  // Check if the fragment contains the keyword "feeds"
+  const hasFeeds = urlFragment.includes("feeds");
+
+  // Now, hasFeeds will be true if "feeds" is in the fragment
+  console.log(hasFeeds);
+
+  if (hasFeeds) {
+    return;
+  }
   return (
-    <footer className="flex flex-col items-center bg-neutral-900 text-center text-white">
+    <footer className="flex flex-col items-center bg-[#08001d] text-center text-white">
       <div className="container px-6 pt-6">
         {/* Social media icons container */}
         <div className="flex items-center justify-between">
@@ -133,18 +145,31 @@ const Footer = (props) => {
           </p>
         </div>
         {/* Links section */}
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-5">
           <div className="mb-6">
-            <Link className="mb-2.5 font-bold uppercase">Rooms</Link>
+            <Link to="/" className="mb-2.5 font-bold uppercase">
+              Home
+            </Link>
           </div>
           <div className="mb-6">
-            <Link className="mb-2.5 font-bold uppercase">Feeds</Link>
+            <Link to="/rooms" className="mb-2.5 font-bold uppercase">
+              Rooms
+            </Link>
           </div>
           <div className="mb-6">
-            <Link className="mb-2.5 font-bold uppercase">Chats</Link>
+            <Link to="/feeds" className="mb-2.5 font-bold uppercase">
+              Feeds
+            </Link>
           </div>
           <div className="mb-6">
-            <Link className="mb-2.5 font-bold uppercase">Contact</Link>
+            <Link to="/chat" className="mb-2.5 font-bold uppercase">
+              Chats
+            </Link>
+          </div>
+          <div className="mb-6">
+            <Link to="contact" className="mb-2.5 font-bold uppercase">
+              Contact
+            </Link>
           </div>
         </div>
       </div>

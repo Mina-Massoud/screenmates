@@ -21,11 +21,12 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   const [closeSelf, setCloseSelf] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
+  const [sending, setSending] = useState(false);
+  const [delayTime, setDelayTime] = useState(0);
   let MyInput = useRef();
   const param = useParams();
 
-  console.log(param);
+
 
   useEffect(() => {
     if (!id) {
@@ -36,21 +37,33 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
 
   useEffect(() => {
     axios
-      .get(
-        `${import.meta.env.VITE_PORT}/posts/${id}?req=${GetUserName()}`
-      ) // Pass an object with key-value pairs
+      .get(`${import.meta.env.VITE_PORT}/posts/${id}?req=${GetUserName()}`) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
         setData(response.data[0]);
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+
       });
   }, [flag]);
 
+  useEffect(() => {});
+
   function handleSendComment() {
+    if (delayTime) {
+  
+      if (Date.now() - delayTime < 2000) {
+        setSending("MANY REQUESTS");
+        setDelayTime(Date.now());
+        return 0;
+      }
+    }
+
+    setDelayTime(Date.now());
+    setSending("sending");
     const publisher = GetUserName();
+
     axios
       .post(`${import.meta.env.VITE_PORT}/posts/${id}/comments`, {
         publisher: publisher,
@@ -59,14 +72,22 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
       .then(function (response) {
         // handle success
         setCommentData(response.data[0]);
+        setSending(false);
         setFlag((prev) => !prev);
         MyInput.current.value = "";
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        setSending("error");
       });
   }
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      // Enter key was pressed, you can perform your desired action here
+      handleSendComment();
+    }
+  };
 
   function sendReactToParent(data) {
     sendReactToParentFeeds(data);
@@ -90,8 +111,6 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
       </div>
     );
   }
-
-  console.log(id);
 
   return (
     <div
@@ -130,12 +149,24 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
                 })}
               </ScrollToBottom>
             )}
+            {sending === "sending" ? (
+              <p>Sending...</p>
+            ) : sending === "error" ? (
+              <p className="text-red-600">
+                An error has occurred. Please try again.
+              </p>
+            ) : sending === "MANY REQUESTS" ? (
+              <p className="text-yellow-600">Excessive requests detected.</p>
+            ) : (
+              ""
+            )}
 
             <div className="input-cont relative mt-[2em] flex">
               <input
+                onKeyDown={handleKeyPress}
                 ref={MyInput}
                 type="text"
-                className="py-[0.8em] mt-auto w-full border px-[1em] rounded-full bg-transparent"
+                className="py-[0.8em] mt-auto w-full border px-[1em] rounded-full bg-black"
                 placeholder="Write Comment.."
                 onChange={(event) => {
                   setCommentData(event.target.value);
