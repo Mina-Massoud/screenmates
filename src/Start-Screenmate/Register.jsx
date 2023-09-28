@@ -51,7 +51,7 @@ const Register = () => {
 
   const handleRegister = () => {
     axios
-      .post("https://screenmates-beta-v.onrender.com/signup/", regData)
+      .post(`${import.meta.env.VITE_PORT}/signup/`, regData)
       .then(function (response) {
         console.log(response); // handle success
         navigate("/login");

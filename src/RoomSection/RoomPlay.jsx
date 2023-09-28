@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 // import copy from "clipboard-copy";
 import "animate.css";
 import GetUserName from "../APIS/getUserName";
+import { io } from "socket.io-client";
 
 const RoomPlay = (props) => {
   // State for rendering
@@ -27,6 +28,7 @@ const RoomPlay = (props) => {
   );
   const [pausedFromOnwer, setPausedFromOnwer] = useState(false);
   const [videoTime, setVideoTime] = useState();
+
   // Function to copy the parameter to the clipboard
   const copyToClipboard = (roomID) => {
     copy(roomID);
@@ -53,10 +55,14 @@ const RoomPlay = (props) => {
 
     socket.on("userJoined", (data) => {
       setUserIsJoined(true);
+      console.log(data);
       setIsOwner(data.owner === GetUserName());
       handleSharedDetails(data.socketId);
     });
 
+    socket.on("ownershiptransferred", ({ owner }) => {
+      setIsOwner(owner === GetUserName());
+    });
     // Handle video started event
     socket.on("video_started_to", (Time) => {
       setIsVideoStarted(true);
@@ -77,6 +83,13 @@ const RoomPlay = (props) => {
       playerRef.current.pauseVideo();
     });
 
+    socket.on("getCurrentTime", () => {
+      socket.emit("videoTimeSent", {
+        userId: socket.id,
+        currentTime: playerRef.current.getCurrentTime(),
+      });
+    });
+
     // Clean up the event listeners when the component unmounts
     return () => {
       socket.off("joined_random_room", handleRoomID);
@@ -87,16 +100,29 @@ const RoomPlay = (props) => {
     };
   }, [SearchData]);
 
-  console.log(videoTime);
+  useEffect(() => {
+    socket.connect();
+
+    return () => {
+      console.log("Disconnect");
+      console.log(socket);
+      socket.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
+    console.log("enter1");
     if (isReady) {
+      console.log("enter2");
       if (isVideoStarted) {
+        console.log("enter3");
         setCanIemit(false);
         handleSeekTo(currenttime);
       }
     }
   }, [isReady]);
+
+  console.log(isVideoStarted, " is video started ");
 
   // Function to seek to a specific time in the video
   const handleSeekTo = (seconds) => {
@@ -107,6 +133,7 @@ const RoomPlay = (props) => {
     }
   };
 
+  console.log("Owner ", isOwner);
   // Function to handle video paused
   function handleOnPause() {
     if (!isOwner) {
@@ -120,12 +147,12 @@ const RoomPlay = (props) => {
   function handleOnPlay(event) {
     setIsVideoStarted(true);
     if (canIEmit) {
-      if (!videoTime) {
+      if (!videoTime)
         socket.emit("video_started", {
           roomId,
           currentTime: event.target.getCurrentTime(),
         });
-      }
+      setVideoTime(false);
     } else {
       setCanIemit(true);
     }
@@ -141,8 +168,8 @@ const RoomPlay = (props) => {
   }
 
   useEffect(() => {
+    console.log("enter X");
     if (isVideoStarted) {
-      console.log("userJoined");
       socket.emit("video_started", {
         roomId,
         currentTime: playerRef.current.getCurrentTime(),
@@ -230,7 +257,7 @@ const RoomPlay = (props) => {
                     handleOnPause();
                   }
                   setPausedFromOnwer(false);
-                  event.preventDefault();
+                  // event.preventDefault();
                 }}
                 // opts={!isOwner && videoOpts}
                 onPlay={handleOnPlay}

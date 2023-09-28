@@ -26,7 +26,7 @@ const Feeds = (props) => {
             sendReactToParentFeeds={sendReactToParentFeeds}
             id={showingPostDetails}
           />
-         <div className="bg-black fixed top-[0em] z-max w-full h-[80px]">
+         <div className="bg-effect left-0  fixed top-[0em] z-max w-full h-[80px]">
             <AiOutlineClose
               onClick={() => {
                 setTimeout(() => {

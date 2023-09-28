@@ -8,8 +8,7 @@ import { SocketContext } from "../APIS/SocketContext";
 import { createPortal } from "react-dom";
 import NotificationPage from "../Feeds/Notifications-section/NotificationPage.jsx/NotificationPage";
 import { useEffect } from "react";
-import axios from "axios";
-import GetUserName from "../APIS/getUserName";
+
 
 const LayoutContext = createContext();
 

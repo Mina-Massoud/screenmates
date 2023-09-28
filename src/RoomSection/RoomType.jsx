@@ -27,6 +27,11 @@ const RoomType = (props) => {
     { image: "", name: "" },
   ];
 
+  console.log(socket);
+  if (!socket.connected) {
+    socket.connect();
+  }
+
   function handleConnectingToRoom() {
     if (PrivateRoomID !== "") {
       navigate(`/room-player?private=true&roomId=${PrivateRoomID}`);

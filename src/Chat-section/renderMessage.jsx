@@ -26,7 +26,9 @@ const RenderMessage = ({ message, anonymously, socket }) => {
         className={`py-[0.5em] break-word px-[1em] rounded-lg max-w-full my-[0.5em] ${
           userName === message.author
             ? "ml-auto mr-[1em] bg-[#d250d3]"
-            : "mr-auto ml-[1em]  border border-[#5ab6d7] bg-none"
+            : `mr-auto ml-[1em]  border border-[#5ab6d7] bg-none ${
+                message.messageType && "bg-black"
+              }`
         } w-fit text-wrap`}
       >
         <p>{messageText}</p>

@@ -13,7 +13,7 @@ const ProfileCardFeed = (props) => {
 
   useEffect(() => {
     axios
-      .get(`https://screenmates-beta-v.onrender.com/users/${GetUserName()}`)
+      .get(`${import.meta.env.VITE_PORT}/users/${GetUserName()}`)
       .then(function (response) {
         // handle success
         setUserData(response.data[0]);

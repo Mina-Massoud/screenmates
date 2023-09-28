@@ -18,7 +18,7 @@ const Home = (props) => {
 
   useEffect(() => {
     axios
-      .get(`https://screenmates-beta-v.onrender.com/rooms`)
+      .get(`${import.meta.env.VITE_PORT}/rooms`)
       .then(function (response) {
         console.log(response.data);
         setRooms(response.data);

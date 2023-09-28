@@ -21,7 +21,7 @@ const NotificationPage = ({ className, notification, socket , deleteNotification
 
   if (notification === undefined) {
     axios
-      .get(`http://localhost:8000/users/${GetUserName()}/notifications`)
+      .get(`${import.meta.env.VITE_PORT}/users/${GetUserName()}/notifications`)
       .then((response) => {
         console.log(response);
         setNotificationFetching(response.data);

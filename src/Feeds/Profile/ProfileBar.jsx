@@ -35,7 +35,7 @@ const ProfileBar = ({ filter }) => {
           selected == 3 && "bg-white text-black"
         }`}
       >
-        video
+        Video
       </button>
       {/* <button
         onClick={(event) => {

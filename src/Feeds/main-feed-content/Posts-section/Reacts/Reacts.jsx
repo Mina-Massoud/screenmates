@@ -106,7 +106,7 @@ const Reacts = ({ id, reactType }) => {
       ClickSoundEffect.play();
       axios
         .delete(
-          `https://screenmates-beta-v.onrender.com/${id}/reacts?publisher=${GetUserName()}`
+          `${import.meta.env.VITE_PORT}/${id}/reacts?publisher=${GetUserName()}`
         )
         .then((response) => {
           // Handle the response here
@@ -134,7 +134,7 @@ const Reacts = ({ id, reactType }) => {
     });
 
     axios
-      .post(`https://screenmates-beta-v.onrender.com/posts/${id}/reacts`, {
+      .post(`${import.meta.env.VITE_PORT}/posts/${id}/reacts`, {
         publisher: GetUserName(),
         reactType: event.target.name,
       })

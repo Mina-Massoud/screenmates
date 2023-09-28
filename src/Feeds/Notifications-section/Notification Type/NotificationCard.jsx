@@ -54,7 +54,6 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
     setCloseHandler();
     deleteNotification(data._id);
   }
-  console.log(data);
   return (
     <Link
       to={
@@ -71,7 +70,7 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
       }}
       className={`notification-card animate__animated ${
         closeEffect ? "animate__fadeOut" : "animate__fadeIn"
-      }  ${parent ? "w-full" : "max-w-[500px]"} md:min-w-[350px]`}
+      }  ${parent ? "w-full" : "max-w-[500px]"}`}
     >
       <div
         className={`p-[0.5em] pb-[1em] bg-[#08000e] relative hover:bg-[#111111] transition duration-300 justify-between flex flex-col ${
@@ -85,7 +84,7 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
           }}
           size={17}
         />
-        <div className="left-side-friend-card flex ">
+        <div className="left-side-friend-card flex">
           <img
             className="min-w-[1px] main-text-gradient-background mr-[1em] aspect-square rounded-lg max-w-[50px] max-h-[50px] rounded-lg"
             src={

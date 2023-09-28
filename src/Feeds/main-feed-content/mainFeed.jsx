@@ -39,83 +39,49 @@ const Mainfeed = ({
 
   const fetchData = () => {
     console.log("fetching");
-    // Get posts based on the profile and filter values
-    // Example usage of pageNumber
     pageNumber.current = pageNumber.current + 1;
     console.log("Updated pageNumber:", pageNumber.current);
     // Step 2: Include the cookie in the headers of your HTTP request
+    if (pageNumber.current) {
+      const apiUrl = profile
+        ? `${
+            import.meta.env.VITE_PORT
+          }/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}&offset=${
+            pageNumber.current
+          }&limit=${10}`
+        : `${import.meta.env.VITE_PORT}/feed/${userNameURL}?offset=${
+            pageNumber.current
+          }&limit=${10}`;
 
-    const apiUrl = profile
-      ? `https://screenmates-beta-v.onrender.com/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}&offset=${
-          pageNumber.current
-        }&limit=${10}`
-      : `https://screenmates-beta-v.onrender.com/feed/${userNameURL}?offset=${pageNumber}&limit=${10}`;
-
-    axios
-      .get(apiUrl)
-      .then(function (response) {
-        // handle success
-        console.log(response);
-        if (!response.data.length) {
-          setHasMoreState(false);
-          return;
-        }
-
-        setPosts((prev) => [...prev, ...response.data]);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
+      axios
+        .get(apiUrl)
+        .then(function (response) {
+          // handle success
+          console.log(response);
+          if (!response.data.length) {
+            setHasMoreState(false);
+            return;
+          }
+          setPosts((prev) => [...prev, ...response.data]);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
+    }
   };
 
-  useEffect(() => {
-    fetchData(); // Fetch initial data
-  }, [pageNumber]);
+  // useEffect(() => {
+  //   fetchData(); // Fetch initial data
+  // }, []);
 
   useEffect(() => {
-    console.log("bec  0");
     pageNumber.current = 0;
     setPosts([]);
     fetchData();
   }, [filter, userNameURL]);
 
-  // useEffect(() => {
-  //   //get posts
-  //   if (!profile) {
-  //     axios
-  //       .get(`http://localhost:8000/feed/${userNameURL}`) // Pass an object with key-value pairs
-  //       .then(function (response) {
-  //         // handle success
-  //         setPosts(response.data);
-  //         console.log(response);
-  //       })
-  //       .catch(function (error) {
-  //         // handle error
-  //         console.log(error);
-  //       });
-  //   }
-  // }, [forceRender]);
-
-  // useEffect(() => {
-  //   if (profile) {
-  //     axios
-  //       .get(
-  //         `http://localhost:8000/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}`
-  //       ) // Pass an object with key-value pairs
-  //       .then(function (response) {
-  //         // handle success
-  //         console.log("entered");
-  //         console.log(response);
-  //         setPosts(response.data);
-  //       })
-  //       .catch(function (error) {
-  //         // handle error
-  //         console.log(error);
-  //       });
-  //   }
-  // }, [filter, userNameURL, forceRender]);
-
+  console.log(posts);
   return (
     <div
       id={!profile && "scrollableDiv"}

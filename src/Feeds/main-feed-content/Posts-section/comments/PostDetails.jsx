@@ -37,7 +37,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   useEffect(() => {
     axios
       .get(
-        `https://screenmates-beta-v.onrender.com/posts/${id}?req=${GetUserName()}`
+        `${import.meta.env.VITE_PORT}/posts/${id}?req=${GetUserName()}`
       ) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
@@ -52,7 +52,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   function handleSendComment() {
     const publisher = GetUserName();
     axios
-      .post(`https://screenmates-beta-v.onrender.com/posts/${id}/comments`, {
+      .post(`${import.meta.env.VITE_PORT}/posts/${id}/comments`, {
         publisher: publisher,
         caption: commentData, // Assuming commentData holds your comment content
       })
@@ -102,7 +102,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
       } overflow-y-auto bg-effect flex justify-center pt-[4em] z-max min-h-[100vh]`}
     >
       {closeSelf && (
-        <div className="bg-black fixed top-[0em] z-max w-full h-[80px]">
+        <div className="bg-black left-0 fixed top-[0em] z-max w-full h-[80px]">
           <AiOutlineClose
             onClick={handleCloseEffect}
             className=" vertical-center cursor-pointer border  bg-white text-black left-5 rounded-full p-[0.2em]"

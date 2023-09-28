@@ -7,7 +7,7 @@ const NotficationsComment = ({ causativeUser , postId}) => {
 
   useEffect(() => {
     axios
-      .get(`https://screenmates-beta-v.onrender.com/posts/${postId}`) // Pass an object with key-value pairs
+      .get(`${import.meta.env.VITE_PORT}/posts/${postId}`) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
         console.log(response);

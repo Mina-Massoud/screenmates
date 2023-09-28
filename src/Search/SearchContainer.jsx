@@ -10,7 +10,7 @@ const SearchContainer = ({ className, searchData }) => {
   useEffect(() => {
     console.log("entered");
     axios
-      .get(`https://screenmates-beta-v.onrender.com/users?userName=${searchData}`)
+      .get(`${import.meta.env.VITE_PORT}/users?userName=${searchData}`)
       .then((response) => {
         // Handle the response here
         setSearchResult(response.data);

@@ -9,7 +9,7 @@ const FriendsSide = (props) => {
   const [friends, setFriends] = useState();
   useEffect(() => {
     axios
-      .get(`https://screenmates-beta-v.onrender.com/users/${GetUserName()}/friends`)
+      .get(`${import.meta.env.VITE_PORT}/users/${GetUserName()}/friends`)
       .then((response) => {
         // Handle the response here
         setFriends(response.data);

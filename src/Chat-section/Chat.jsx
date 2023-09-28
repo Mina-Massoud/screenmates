@@ -46,12 +46,24 @@ const Chat = ({ grid }) => {
       socket.on("room_created", handleRoomID);
       // setIsConnected(true);
     }
+    socket.on("userJoined", (data) => {
+      console.log(data);
+      if (data.connectedUser !== GetUserName()) {
+        const userJoinedData = {
+          connectedUser: data.connectedUser,
+          message: `${data.connectedUser} Joined the room!`,
+          messageType: "alert",
+        };
+        setMessages((prev) => [...prev, userJoinedData]);
+      }
+    });
     // socket.on("userIsConnected", connectedUser);
     socket.on("message_received", handleMessageReceived);
 
     return () => {
       // socket.off("userIsConnected", connectedUser);
       socket.off("message_received", handleMessageReceived);
+      socket.off("userJoined");
       // socket.disconnect();
     };
   }, []);
@@ -130,9 +142,11 @@ const Chat = ({ grid }) => {
         {messages.length ? (
           messages.map((message) => {
             return (
-              <RenderMessage anonymously={anonymously} 
-              socket = {socket.id}
-              message={message} />
+              <RenderMessage
+                anonymously={anonymously}
+                socket={socket.id}
+                message={message}
+              />
             );
           })
         ) : (

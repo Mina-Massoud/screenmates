@@ -26,7 +26,7 @@ const Login = () => {
       return;
     }
     axios
-      .post("https://screenmates-beta-v.onrender.com/login/", loginData)
+      .post(`${import.meta.env.VITE_PORT}/login/`, loginData)
       .then(function (response) {
         console.log(response); // handle success
         navigate("/");
@@ -37,6 +37,7 @@ const Login = () => {
         // setError(error.response.data.err);
       });
   };
+
 
   const handleShowPassword = () => {
     const inputType = showPassword ? "password" : "text";

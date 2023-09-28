@@ -10,6 +10,7 @@ import GetUserName from "../../APIS/getUserName";
 import ProfilePost from "./Profile-details-type/ProfilePost";
 import PostDetails from "../main-feed-content/Posts-section/comments/PostDetails";
 import { AiOutlineClose } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 const ProfilePage = (props) => {
   const [userData, setUserData] = useState();
   const [coverImg, setCoverImg] = useState();
@@ -25,7 +26,7 @@ const ProfilePage = (props) => {
   const [showingPostDetails, setShowingPostDetails] = useState();
   const [closingPostDetails, setCLosingPostDetails] = useState();
   const [forceRenderMainFeed, setForceRenderMainFeed] = useState(false);
-
+  const naviagte = useNavigate();
   function sendReactToParentFeeds(data) {
     setForceRenderMainFeed(data);
   }
@@ -36,7 +37,6 @@ const ProfilePage = (props) => {
     }
   }, []);
 
-  
   useEffect(() => {
     setUserNameURL(param.id);
   }, [param.id]);
@@ -44,7 +44,7 @@ const ProfilePage = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://screenmates.onrender.com/users/${userNameURL}?req=${GetUserName()}`
+        `${import.meta.env.VITE_PORT}/users/${userNameURL}?req=${GetUserName()}`
       )
       .then(function (response) {
         // handle success
@@ -79,7 +79,7 @@ const ProfilePage = (props) => {
           if (result.info.resource_type === "image") {
             axios
               .put(
-                `https://screenmates-beta-v.onrender.com/users/${userNameURL}`,
+                `${import.meta.env.VITE_PORT}/users/${userNameURL}`,
                 {
                   coverURL: result.info.url,
                 }
@@ -116,7 +116,7 @@ const ProfilePage = (props) => {
           if (result.info.resource_type === "image") {
             axios
               .put(
-                `https://screenmates-beta-v.onrender.com/users/${userNameURL}`,
+                `${import.meta.env.VITE_PORT}/users/${userNameURL}`,
                 {
                   imgURL: result.info.url,
                 }
@@ -173,7 +173,7 @@ const ProfilePage = (props) => {
   function handeSendRequest() {
     axios
       .post(
-        `https://screenmates-beta-v.onrender.com/users/${userNameURL}/friendRequests`,
+        `${import.meta.env.VITE_PORT}/users/${userNameURL}/friendRequests`,
         {
           friendUserName: CurrentUser,
         }
@@ -191,7 +191,9 @@ const ProfilePage = (props) => {
   function handleDeleteFriend() {
     axios
       .delete(
-        `https://screenmates-beta-v.onrender.com/users/${userNameURL}/friends/${CurrentUser}`
+        `${
+          import.meta.env.VITE_PORT
+        }/users/${userNameURL}/friends/${CurrentUser}`
       )
       .then((response) => {
         // Handle the response here
@@ -206,7 +208,9 @@ const ProfilePage = (props) => {
   function handleDeleteRequest() {
     axios
       .delete(
-        `https://screenmates-beta-v.onrender.com/users/${userNameURL}/friendRequests/${CurrentUser}`
+        `${
+          import.meta.env.VITE_PORT
+        }/users/${userNameURL}/friendRequests/${CurrentUser}`
       )
       .then((response) => {
         // Handle the response here
@@ -220,12 +224,9 @@ const ProfilePage = (props) => {
 
   function handleAcceptFriend() {
     axios
-      .post(
-        `https://screenmates-beta-v.onrender.com/users/${CurrentUser}/friends`,
-        {
-          friendUserName: userNameURL,
-        }
-      )
+      .post(`${import.meta.env.VITE_PORT}/users/${CurrentUser}/friends`, {
+        friendUserName: userNameURL,
+      })
       .then((response) => {
         // Handle the response here
         setCancelFriend(true);
@@ -279,7 +280,7 @@ const ProfilePage = (props) => {
             id={showingPostDetails}
             close={closingPostDetails}
           />
-          <div className="bg-black fixed top-[0em] z-max w-full h-[80px]">
+          <div className="bg-effect left-0 fixed top-[0em] z-max w-full h-[80px]">
             <AiOutlineClose
               onClick={() => {
                 setCLosingPostDetails(true);
@@ -311,7 +312,7 @@ const ProfilePage = (props) => {
           )}
         </div>
         <div className="edit-user-info">
-          {userNameURL !== CurrentUser && (
+          {userNameURL !== CurrentUser ? (
             <button
               onClick={requestHandle}
               className={`border px-[2.5em] ${
@@ -327,6 +328,16 @@ const ProfilePage = (props) => {
                 : !AddFriend
                 ? "Add friend"
                 : "Friend request is sent"}
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                localStorage.clear("token");
+                naviagte("/login");
+              }}
+              className="bg-red-600 py-[0.5em] px-[2em] rounded-full mt-[2.5em] text-white"
+            >
+              Log out
             </button>
           )}
         </div>
