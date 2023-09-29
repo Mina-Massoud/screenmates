@@ -167,7 +167,11 @@ const Register = () => {
               }}
             />
             <button
-              onClick={handleShowPassword}
+              type="text"
+              onClick={(event) => {
+                event.preventDefault();
+                handleShowPassword();
+              }}
               className="absolute center-v right-[30px]"
             >
               {!showPassword ? (
