@@ -26,15 +26,13 @@ const ProfilePage = (props) => {
   const [showingPostDetails, setShowingPostDetails] = useState();
   const [closingPostDetails, setCLosingPostDetails] = useState();
   const [forceRenderMainFeed, setForceRenderMainFeed] = useState(false);
+  const [loading, setLoading] = useState(false);
   const naviagte = useNavigate();
   function sendReactToParentFeeds(data) {
     setForceRenderMainFeed(data);
   }
-  console.log("OPTIONS ", options);
   useEffect(() => {
-    console.log(GetUserName());
-    console.log(userNameURL);
-      setOptions(userNameURL === GetUserName());
+    setOptions(userNameURL === GetUserName());
   }, [userNameURL]);
 
   useEffect(() => {
@@ -42,6 +40,11 @@ const ProfilePage = (props) => {
   }, [param.id]);
 
   useEffect(() => {
+    setCancelFriend(false);
+    setAddFriend(false);
+    setConfirmFriend(false);
+
+    setLoading(true);
     axios
       .get(
         `${import.meta.env.VITE_PORT}/users/${userNameURL}?req=${GetUserName()}`
@@ -49,6 +52,7 @@ const ProfilePage = (props) => {
       .then(function (response) {
         // handle success
         setUserData(response.data[0]);
+        setLoading(false);
         const { friendshipStatus } = response.data[0];
         if (friendshipStatus === "friend") {
           showCancelFriendBtn(true);
@@ -242,7 +246,7 @@ const ProfilePage = (props) => {
     } else handeSendRequest();
   }
 
-  if (!userData) {
+  if (!userData || loading) {
     return (
       <div className="w-full flex-grow flex h-[100vh] items-center justify-center">
         <ReactLoading
