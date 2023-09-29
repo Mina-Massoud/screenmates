@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
-const DropDownPostsList = ({ id, isDeleted, isEdit, comment }) => {
+const DropDownPostsList = ({ id, isDeleted, isEdit, comment  , postId}) => {
   function deletePostHandler(id) {
     Swal.fire({
       title: "Are you sure?",
@@ -32,10 +32,11 @@ const DropDownPostsList = ({ id, isDeleted, isEdit, comment }) => {
 
   function deleteCommentHandler(id) {
     axios
-      .delete(`${import.meta.env.VITE_PORT}/posts/${id}`)
+      .delete(`${import.meta.env.VITE_PORT}/posts/${postId}/comments/${id}`)
       .then(function (response) {
         // handle success
         console.log(response);
+        isDeleted(true)
       })
       .catch(function (error) {
         // handle error
@@ -53,7 +54,7 @@ const DropDownPostsList = ({ id, isDeleted, isEdit, comment }) => {
 
   return (
     <ul
-      className={`absolute animate__animated animate__fadeIn z-max bg-black w-[150px] ${
+      className={`absolute animate__animated animate__fadeIn z-[1] bg-black w-[150px] ${
         !comment ? "left-[-130px] top-[2em]" : "left-[0] top-[3em]"
       }  rounded-lg overflow-none`}
     >

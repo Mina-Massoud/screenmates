@@ -8,7 +8,7 @@ const NotificationFriend = ({ causativeUser }) => {
   function handleAcceptFriend() {
     setConfirmedStatus("sending");
     axios
-      .post(`${import.meta.env.VITE_PORT}/${GetUserName()}/friends`, {
+      .post(`${import.meta.env.VITE_PORT}/users/${GetUserName()}/friends`, {
         friendUserName: causativeUser,
       })
       .then((response) => {

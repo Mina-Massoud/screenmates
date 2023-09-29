@@ -7,7 +7,12 @@ import axios from "axios";
 import GetUserName from "../../../APIS/getUserName";
 import notificationSound from "../../../media/sounds/notification.wav";
 
-const NotificationPage = ({ className, notification, socket , deleteNotification }) => {
+const NotificationPage = ({
+  className,
+  notification,
+  socket,
+  deleteNotification,
+}) => {
   const [notificationFetching, setNotificationFetching] = useState();
 
   className = classNames(
@@ -17,18 +22,22 @@ const NotificationPage = ({ className, notification, socket , deleteNotification
     className
   );
 
-  if (notification === undefined) {
-    axios
-      .get(`${import.meta.env.VITE_PORT}/users/${GetUserName()}/notifications`)
-      .then((response) => {
-        console.log(response);
-        setNotificationFetching(response.data);
-      })
-      .catch((error) => {
-        // Handle errors here
-        console.error(error);
-      });
-  }
+  useEffect(() => {
+    if (notification === undefined) {
+      axios
+        .get(
+          `${import.meta.env.VITE_PORT}/users/${GetUserName()}/notifications`
+        )
+        .then((response) => {
+          console.log(response);
+          setNotificationFetching(response.data);
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error(error);
+        });
+    }
+  }, []);
 
   if (!notification && !notificationFetching) {
     return;
@@ -60,6 +69,7 @@ const NotificationPage = ({ className, notification, socket , deleteNotification
                 key={child._id}
                 data={child}
                 parent={true}
+                options={true}
               />
             ))
           : null}{" "}

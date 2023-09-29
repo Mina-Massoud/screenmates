@@ -12,7 +12,12 @@ import NotificationReact from "./NotificationReact";
 import NotficationsComment from "./NotificationComment";
 import { useLocation } from "react-router-dom";
 
-const NotificationCard = ({ parent = false, data, deleteNotification }) => {
+const NotificationCard = ({
+  parent = false,
+  data,
+  deleteNotification,
+  options,
+}) => {
   const [hover, setHover] = useState(false);
   const [close, setClose] = useState(false);
   const [closeEffect, setCloseEffect] = useState(false);
@@ -25,11 +30,13 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
 
   useEffect(() => {
     let closeDelay;
-    if (!hover) {
-      closeDelay = setTimeout(() => {
-        setCloseEffect(true);
-        setCloseHandler();
-      }, 10000);
+    if (!options) {
+      if (!hover) {
+        closeDelay = setTimeout(() => {
+          setCloseEffect(true);
+          setCloseHandler();
+        }, 10000);
+      }
     }
 
     return () => {
@@ -51,6 +58,7 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
     setCloseHandler();
   }
 
+  console.log(data);
   return (
     <Link
       to={
@@ -67,22 +75,26 @@ const NotificationCard = ({ parent = false, data, deleteNotification }) => {
       }}
       className={`notification-card animate__animated ${
         closeEffect ? "animate__fadeOut" : "animate__fadeIn"
-      }  ${parent ? "w-full" : "max-w-[500px]"}`}
+      }  ${parent ? "w-full" : !options ? "max-w-[500px]" : ""}`}
     >
       <div
         className={`p-[0.5em] pb-[1em] bg-[#08000e] relative hover:bg-[#111111] transition duration-300 justify-between flex flex-col ${
-          parent ? "w-full" : "max-w-[500px]"
+          parent ? "w-full" : !options ? "max-w-[500px]" : ""
+        }
         }  rounded-lg`}
       >
-        <AiFillCloseCircle
-          className="ml-auto mb-[0.5em] cursor-pointer"
-          onClick={(event) => {
-            event.preventDefault(); // Prevent navigation
+        {!options && (
+          <AiFillCloseCircle
+            className="ml-auto mb-[0.5em] cursor-pointer"
+            onClick={(event) => {
+              event.preventDefault(); // Prevent navigation
 
-            handleRemoveNotification();
-          }}
-          size={17}
-        />
+              handleRemoveNotification();
+            }}
+            size={17}
+          />
+        )}
+
         <div className="left-side-friend-card flex">
           <img
             className="min-w-[1px] main-text-gradient-background mr-[1em] aspect-square rounded-lg max-w-[50px] max-h-[50px] rounded-lg"

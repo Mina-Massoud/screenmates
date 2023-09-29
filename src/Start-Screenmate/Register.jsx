@@ -50,7 +50,8 @@ const Register = () => {
     myCropWidget.current.open();
   };
 
-  const handleRegister = () => {
+  const handleRegister = (event) => {
+    event.preventDefault();
     axios
       .post(`${import.meta.env.VITE_PORT}/signup/`, regData)
       .then(function (response) {
@@ -59,8 +60,19 @@ const Register = () => {
       })
       .catch(function (error) {
         console.log(error);
-        const myErr = Object.keys(error.response.data.errors)[0];
-        setErrorState(error.response.data.errors[myErr]);
+        // const myErr = Object.keys(error.response.data.errors)[0];
+        // setErrorState(error.response.data.errors[myErr]);
+        let ErrorMessage;
+
+        for (const key in error.response.data.errors) {
+          if (error.response.data.errors.hasOwnProperty(key)) {
+            ErrorMessage = error.response.data.errors[key];
+            break;
+            console.log(ErrorMessage);
+          }
+        }
+
+        setErrorState(ErrorMessage);
         console.log(error); // handle error
       });
   };
@@ -95,9 +107,10 @@ const Register = () => {
           </h1>
           <p>Register Now</p>
         </div>
-        <div className="credi-grid pb-[5em]">
+        <form onSubmit={handleRegister} className="credi-grid pb-[5em]">
           <input
             type="text"
+            required
             className="reg-first-name required reg-input"
             placeholder="First Name"
             name="firstName"
@@ -111,6 +124,7 @@ const Register = () => {
           />
           <input
             type="text"
+            required
             className="reg-last-name reg-input"
             placeholder="Last Name"
             name="lastName"
@@ -124,6 +138,7 @@ const Register = () => {
           />
           <input
             type="text"
+            required
             className="reg-username reg-input"
             placeholder="username"
             name="userName"
@@ -138,6 +153,7 @@ const Register = () => {
           <div className="password relative reg-password">
             <input
               ref={passwordInput}
+              required
               type="password"
               className="reg-input w-full"
               placeholder="Password"
@@ -175,10 +191,7 @@ const Register = () => {
             )}
           </div>
 
-          <button
-            onClick={handleRegister}
-            className="reg-button main-text-gradient-background rounded-full mr-[0.5em] p-[1em]  transition duration-300"
-          >
+          <button className="reg-button main-text-gradient-background rounded-full mr-[0.5em] p-[1em]  transition duration-300">
             Register
           </button>
           <Link
@@ -193,7 +206,7 @@ const Register = () => {
               {errorState}
             </p>
           )}
-        </div>
+        </form>
       </div>
     </>
   );

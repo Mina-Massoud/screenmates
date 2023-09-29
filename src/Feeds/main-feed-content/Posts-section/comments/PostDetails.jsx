@@ -12,11 +12,11 @@ import "animate.css";
 import { AiOutlineClose } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   const [data, setData] = useState();
   const [commentData, setCommentData] = useState();
-  const [flag, setFlag] = useState(false);
   const [closed, setClosed] = useState(close);
   const [closeSelf, setCloseSelf] = useState(false);
   const location = useLocation();
@@ -26,6 +26,8 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   let MyInput = useRef();
   const param = useParams();
   const [commentsList, setCommentsList] = useState([]);
+  const [hasMoreState, setHasMoreState] = useState(true);
+  const pageNumber = useRef(0);
 
   useEffect(() => {
     if (!id) {
@@ -34,17 +36,43 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
     }
   }, []);
 
+  function fetchData() {
+    pageNumber.current = pageNumber.current + 1;
+    axios
+      .get(
+        `${import.meta.env.VITE_PORT}/posts/${id}/comments?offset=${
+          pageNumber.current
+        }&limit=6`
+      ) // Pass an object with key-value pairs
+      .then(function (response) {
+        // handle success
+        if (!response.data.length) {
+          setHasMoreState(false);
+        }
+        console.log(response.data);
+        setCommentsList((prev) => [...prev, ...response.data]);
+      })
+      .catch(function (error) {
+        // handle error
+      });
+  }
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_PORT}/posts/${id}?req=${GetUserName()}`) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
+        console.log(response);
         setData(response.data[0]);
-        setCommentsList(response.data[0].initialComments);
       })
       .catch(function (error) {
         // handle error
+        console.log(error);
       });
+  }, []);
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   function handleSendComment() {
@@ -67,10 +95,8 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
       })
       .then(function (response) {
         // handle success
-        console.log(response.data);
-        setCommentsList((prev) => [...prev, response.data]);
+        setCommentsList((prev) => [response.data, ...prev]);
         setSending(false);
-        setFlag((prev) => !prev);
         MyInput.current.value = "";
       })
       .catch(function (error) {
@@ -121,7 +147,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
         <div className="bg-black left-0 fixed top-[0em] z-max w-full h-[80px]">
           <AiOutlineClose
             onClick={handleCloseEffect}
-            className=" vertical-center cursor-pointer border  bg-white text-black left-5 rounded-full p-[0.2em]"
+            className=" vertical-center cursor-pointer border text-black left-5 rounded-full p-[0.2em]"
             size={25}
           />
         </div>
@@ -140,11 +166,33 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
           </h1>
           <div className="comments-section flex flex-col flex-grow">
             {commentsList && (
-              <ScrollToBottom className="comments-render max-h-[67vh] overflow-handle">
-                {commentsList.map((comment) => {
-                  return <Comment key={comment._id} data={comment} />;
-                })}
-              </ScrollToBottom>
+              <div
+                id="comment_scroll"
+                className="comments-render max-h-[67vh] overflow-handle"
+              >
+                <InfiniteScroll
+                  dataLength={commentsList.length}
+                  next={fetchData}
+                  hasMore={hasMoreState}
+                  scrollableTarget="comment_scroll"
+                  endMessage={
+                    <p className="text-center py-[2em]">
+                      <b>Yay! You have seen it all</b>
+                    </p>
+                  }
+                  loader={<h4>Loading...</h4>}
+                >
+                  {commentsList.map((comment) => {
+                    return (
+                      <Comment
+                        postId={data._id}
+                        key={comment._id}
+                        data={comment}
+                      />
+                    );
+                  })}
+                </InfiniteScroll>
+              </div>
             )}
             {sending === "sending" ? (
               <p>Sending...</p>

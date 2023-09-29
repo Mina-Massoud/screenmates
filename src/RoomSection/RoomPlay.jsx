@@ -7,7 +7,6 @@ import { useSearchParams } from "react-router-dom";
 // import copy from "clipboard-copy";
 import "animate.css";
 import GetUserName from "../APIS/getUserName";
-import { io } from "socket.io-client";
 
 const RoomPlay = (props) => {
   // State for rendering
@@ -111,18 +110,14 @@ const RoomPlay = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log("enter1");
     if (isReady) {
-      console.log("enter2");
       if (isVideoStarted) {
-        console.log("enter3");
         setCanIemit(false);
         handleSeekTo(currenttime);
       }
     }
   }, [isReady]);
 
-  console.log(isVideoStarted, " is video started ");
 
   // Function to seek to a specific time in the video
   const handleSeekTo = (seconds) => {

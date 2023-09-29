@@ -10,8 +10,9 @@ import GetUserName from "../../../../APIS/getUserName";
 import { IoIosArrowDropdown } from "react-icons/io";
 import DropDownPostsList from "../DropDownList/DropDownList";
 import EditComment from "./Edit comment/EditComment";
-const Comment = ({ data }) => {
+const Comment = ({ data  , postId}) => {
   console.log(data);
+  console.log(postId);
   const [showListButton, setShowListButton] = useState(
     data.commentPublisherData.userName === GetUserName()
   );
@@ -48,7 +49,11 @@ const Comment = ({ data }) => {
   }
 
   return (
-    <div className="comment pt-[30px] pb-[20px] relative my-[2em] flex-col-reverse md:flex-row animate__animated animate__zoomIn md:items-center bg-[#282828] px-[1em] rounded-lg justify-between flex mx-[0.5em]">
+    <div
+      className={`comment pt-[30px] pb-[20px] relative ${
+        showDropDownList ? "mb-[4em]" : "my-[2em]"
+      } flex-col-reverse md:flex-row animate__animated animate__zoomIn md:items-center bg-[#282828] px-[1em] rounded-lg justify-between flex mx-[0.5em]`}
+    >
       {showListButton && (
         <IoIosArrowDropdown
           size={25}
@@ -64,6 +69,7 @@ const Comment = ({ data }) => {
           comment={true}
           isDeleted={isDeleted}
           id={data._id}
+          postId={postId}
         />
       )}
       <p>{formatTimeAgo(data.publishDate)}</p>
@@ -74,7 +80,12 @@ const Comment = ({ data }) => {
             {data.commentPublisherData.lastName}
           </h1>
           {isEditedEffect ? (
-            <EditComment initialValue={data.caption} onCancel={onCancel} />
+            <EditComment
+              initialValue={data.caption}
+              id={data._id}
+              postId={postId}
+              onCancel={onCancel}
+            />
           ) : (
             <p className="w-fit ml-auto">{data.caption}</p>
           )}
@@ -85,7 +96,7 @@ const Comment = ({ data }) => {
               ? data.commentPublisherData.imgURL
               : defaultProfilePic
           }
-          className="w-[50px] h-[50px] rounded-full object-cover  border"
+          className="min-w-[50px] w-[50px] max-w-[50px] h-[50px] rounded-full object-cover  border"
           alt=""
         />
       </div>

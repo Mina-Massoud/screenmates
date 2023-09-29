@@ -9,7 +9,7 @@ const ProfileBar = ({ filter }) => {
           filter("");
           setSelected(1);
         }}
-        className={`inline-block text-[1.5rem] text-center w-[100px] md:ml-[0.4em] rounded py-[0.3em] hover:bg-white  hover:text-black transition duration-300 ${
+        className={`inline-block text-[1.2rem] text-center w-[100px] md:ml-[0.4em] rounded py-[0.3em] hover:bg-white  hover:text-black transition duration-300 ${
           selected == 1 && "bg-white text-black"
         }`}
       >
@@ -20,7 +20,7 @@ const ProfileBar = ({ filter }) => {
           filter("image");
           setSelected(2);
         }}
-        className={`inline-block text-[1.5rem] text-center w-[100px] ml-[0.4em] rounded py-[0.3em] hover:bg-white hover:text-black transition duration-300 ${
+        className={`inline-block text-[1.2rem] text-center w-[100px] ml-[0.4em] rounded py-[0.3em] hover:bg-white hover:text-black transition duration-300 ${
           selected == 2 && "bg-white text-black"
         }`}
       >
@@ -31,7 +31,7 @@ const ProfileBar = ({ filter }) => {
           filter("video");
           setSelected(3);
         }}
-        className={`inline-block text-[1.5rem] text-center w-[100px] ml-[0.4em] rounded py-[0.3em] hover:bg-white   hover:text-black transition duration-300 ${
+        className={`inline-block text-[1.2rem] text-center w-[100px] ml-[0.4em] rounded py-[0.3em] hover:bg-white   hover:text-black transition duration-300 ${
           selected == 3 && "bg-white text-black"
         }`}
       >

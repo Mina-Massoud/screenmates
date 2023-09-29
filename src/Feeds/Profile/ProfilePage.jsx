@@ -30,12 +30,12 @@ const ProfilePage = (props) => {
   function sendReactToParentFeeds(data) {
     setForceRenderMainFeed(data);
   }
-
+  console.log("OPTIONS ", options);
   useEffect(() => {
-    if (userNameURL === CurrentUser) {
-      setOptions(true);
-    }
-  }, []);
+    console.log(GetUserName());
+    console.log(userNameURL);
+      setOptions(userNameURL === GetUserName());
+  }, [userNameURL]);
 
   useEffect(() => {
     setUserNameURL(param.id);
@@ -78,12 +78,9 @@ const ProfilePage = (props) => {
         if (!error && result && result.event === "success") {
           if (result.info.resource_type === "image") {
             axios
-              .put(
-                `${import.meta.env.VITE_PORT}/users/${userNameURL}`,
-                {
-                  coverURL: result.info.url,
-                }
-              )
+              .put(`${import.meta.env.VITE_PORT}/users/${userNameURL}`, {
+                coverURL: result.info.url,
+              })
               .then((response) => {
                 // Handle the response here
                 console.log(response);
@@ -115,12 +112,9 @@ const ProfilePage = (props) => {
         if (!error && result && result.event === "success") {
           if (result.info.resource_type === "image") {
             axios
-              .put(
-                `${import.meta.env.VITE_PORT}/users/${userNameURL}`,
-                {
-                  imgURL: result.info.url,
-                }
-              )
+              .put(`${import.meta.env.VITE_PORT}/users/${userNameURL}`, {
+                imgURL: result.info.url,
+              })
               .then((response) => {
                 // Handle the response here
                 console.log(response);
@@ -289,7 +283,7 @@ const ProfilePage = (props) => {
                   setCLosingPostDetails(false);
                 }, 150);
               }}
-              className="vertical-center cursor-pointer border  bg-white text-black left-5 rounded-full p-[0.2em]"
+              className="vertical-center cursor-pointer border text-black left-5 rounded-full p-[0.2em]"
               size={25}
             />
           </div>
@@ -351,7 +345,7 @@ const ProfilePage = (props) => {
             {options && (
               <AiFillCamera
                 onClick={openProfileWidget}
-                className="absolute bottom-0 left-[2em] bg-white rounded-full text-black p-[5px] cursor-pointer"
+                className="absolute bottom-0 left-[2em] bg-black border rounded-full text-black p-[5px] cursor-pointer"
                 size={35}
               />
             )}

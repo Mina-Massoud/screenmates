@@ -29,6 +29,7 @@ const CreatePost = ({ sendPostToParentHandle }) => {
           Swal.fire("Published!", "Your Post has been Published!", "success");
           console.log(response);
           const postData = response.data;
+          console.log(response.data);
           sendPostToParentHandle(postData);
           setPreviewURL("");
           setVideoUrl("");

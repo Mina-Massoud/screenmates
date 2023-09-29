@@ -47,6 +47,9 @@ textarea {
   outline: none;
   resize: none;
 }
+input { 
+  background-color: black;
+}
 img {
   width: 100%;
 }

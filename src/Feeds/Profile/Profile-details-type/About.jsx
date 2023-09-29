@@ -6,7 +6,12 @@ const About = ({ aboutData, options }) => {
   const [editEffect, setEditEffect] = useState(false);
   const [about, setAbout] = useState(aboutData);
   const [aboutTemp, setAboutTemp] = useState(aboutData);
-  console.log(options);
+
+  console.log("optiions s " ,options);
+  useEffect(() => {
+    setAbout(aboutData);
+  }, [aboutData]);
+
   const AboutInput = useRef();
 
   function openAboutEdit() {
@@ -72,7 +77,9 @@ const About = ({ aboutData, options }) => {
           </div>
         )}
         {!editEffect && (
-          <p className="mt-[1em] text-gray-300 text-[1.2rem] font-black">{about} </p>
+          <p className="mt-[1em] text-gray-300 text-[1.2rem] font-black">
+            {about}{" "}
+          </p>
         )}
       </div>
       <p className="bg-[#a1a1a138] h-[4px] mt-[2em] w-full"></p>

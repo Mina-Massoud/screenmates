@@ -74,7 +74,7 @@ const Mainfeed = ({
   // useEffect(() => {
   //   fetchData(); // Fetch initial data
   // }, []);
-
+console.log(posts);
   useEffect(() => {
     pageNumber.current = 0;
     setPosts([]);

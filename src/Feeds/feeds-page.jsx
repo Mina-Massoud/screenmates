@@ -33,7 +33,7 @@ const Feeds = (props) => {
                   setShowingPostDetails(false);
                 }, 150);
               }}
-              className=" vertical-center cursor-pointer border  bg-white text-black left-5 rounded-full p-[0.2em]"
+              className=" vertical-center cursor-pointer border text-black left-5 rounded-full p-[0.2em]"
               size={25}
             />
           </div>
