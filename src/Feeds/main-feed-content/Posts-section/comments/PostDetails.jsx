@@ -25,8 +25,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   const [delayTime, setDelayTime] = useState(0);
   let MyInput = useRef();
   const param = useParams();
-
-
+  const [commentsList, setCommentsList] = useState([]);
 
   useEffect(() => {
     if (!id) {
@@ -41,18 +40,15 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
       .then(function (response) {
         // handle success
         setData(response.data[0]);
+        setCommentsList(response.data[0].initialComments);
       })
       .catch(function (error) {
         // handle error
-
       });
-  }, [flag]);
-
-  useEffect(() => {});
+  }, []);
 
   function handleSendComment() {
     if (delayTime) {
-  
       if (Date.now() - delayTime < 2000) {
         setSending("MANY REQUESTS");
         setDelayTime(Date.now());
@@ -71,7 +67,8 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
       })
       .then(function (response) {
         // handle success
-        setCommentData(response.data[0]);
+        console.log(response.data);
+        setCommentsList((prev) => [...prev, response.data]);
         setSending(false);
         setFlag((prev) => !prev);
         MyInput.current.value = "";
@@ -99,7 +96,7 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
     navigate(location.state ? location.state : "..");
   }
 
-  if (!data) {
+  if (!data || !commentsList) {
     return (
       <div className="fixed flex animate__animated animate__zoomIn left-0 items-center justify-center w-full  full-center bg-effect z-max h-[100vh]">
         <ReactLoading
@@ -142,9 +139,9 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
             Comments
           </h1>
           <div className="comments-section flex flex-col flex-grow">
-            {data.initialComments && (
+            {commentsList && (
               <ScrollToBottom className="comments-render max-h-[67vh] overflow-handle">
-                {data.initialComments.map((comment) => {
+                {commentsList.map((comment) => {
                   return <Comment key={comment._id} data={comment} />;
                 })}
               </ScrollToBottom>

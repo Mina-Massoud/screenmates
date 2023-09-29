@@ -6,29 +6,86 @@ import axios from "axios";
 import formatTimeAgo from "../../../../helperalgo/datesAlgo";
 import defaultProfilePic from "../../../../media/defaultProfilePic.jpg";
 import "animate.css";
+import GetUserName from "../../../../APIS/getUserName";
+import { IoIosArrowDropdown } from "react-icons/io";
+import DropDownPostsList from "../DropDownList/DropDownList";
+import EditComment from "./Edit comment/EditComment";
 const Comment = ({ data }) => {
+  console.log(data);
+  const [showListButton, setShowListButton] = useState(
+    data.commentPublisherData.userName === GetUserName()
+  );
+
+  const [showDropDownList, setshowDropDownList] = useState(false);
+  const [isEditedEffect, setIsEditedEffect] = useState(false);
+  const [isDeletedEffect, setIsDeletedEffect] = useState(false);
+
+  function isEdit(param) {
+    console.log("in");
+    setshowDropDownList(false);
+    setIsEditedEffect(true);
+  }
+
+  console.log(isEditedEffect);
+
+  function isDeleted(param) {
+    setIsDeletedEffect(param);
+  }
+
+  function onCancel(param) {
+    setIsEditedEffect(false);
+    if (param) {
+      data.caption = param;
+    }
+  }
+
   if (!data) {
     return;
   }
 
+  if (isDeletedEffect) {
+    return;
+  }
+
   return (
-    <div className="comment my-[2em] animate__animated animate__zoomIn items-center bg-[#282828] p-[1.2em] rounded-lg justify-between flex mx-[0.5em]">
+    <div className="comment pt-[30px] pb-[20px] relative my-[2em] flex-col-reverse md:flex-row animate__animated animate__zoomIn md:items-center bg-[#282828] px-[1em] rounded-lg justify-between flex mx-[0.5em]">
+      {showListButton && (
+        <IoIosArrowDropdown
+          size={25}
+          className="cursor-pointer absolute top-[0.5em] left-[0.5em] text-gray-300 z-max"
+          onClick={() => {
+            setshowDropDownList((prev) => !prev);
+          }}
+        />
+      )}
+      {showDropDownList && (
+        <DropDownPostsList
+          isEdit={isEdit}
+          comment={true}
+          isDeleted={isDeleted}
+          id={data._id}
+        />
+      )}
       <p>{formatTimeAgo(data.publishDate)}</p>
-      <div className=" items-center flex">
-        <div className="mx-[1em]">
+      <div className=" items-center justify-end ml-auto w-[full] md:w-[70%] flex">
+        <div className="mx-[1em] w-full">
           <h1 className="text-right font-black my-[0.2em]">
-            {data.commentPublisherData[0].firstName}{" "}
-            {data.commentPublisherData[0].lastName}
+            {data.commentPublisherData.firstName}{" "}
+            {data.commentPublisherData.lastName}
           </h1>
-          <p>{data.caption}</p>
+          {isEditedEffect ? (
+            <EditComment initialValue={data.caption} onCancel={onCancel} />
+          ) : (
+            <p className="w-fit ml-auto">{data.caption}</p>
+          )}
         </div>
         <img
           src={
-            data.commentPublisherData[0].imgURL
-              ? data.commentPublisherData[0].imgURL
+            data.commentPublisherData.imgURL
+              ? data.commentPublisherData.imgURL
               : defaultProfilePic
           }
-          className="w-[50px] ml-[2em] h-[50px] rounded-full object-cover ml-auto border"
+          className="w-[50px] h-[50px] rounded-full object-cover  border"
           alt=""
         />
       </div>

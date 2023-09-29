@@ -34,7 +34,7 @@ const Reacts = ({ id, reactType }) => {
     Skull,
   };
   const styleHandle = ReactStyle();
-  const delay = 1000;
+  const delay = 500;
   const startPress = useRef();
   const touchTimeOut = useRef(null);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -96,13 +96,18 @@ const Reacts = ({ id, reactType }) => {
   }
 
   function handleReactSelected(event) {
-    if (ReactSelected.ReactType === event.target.name || ReactSelected.ReactType) {
+    if (
+      ReactSelected.ReactType === event.target.name ||
+      ReactSelected.ReactType
+    ) {
       const ClickSoundEffect = new Audio(UnselectSound);
       ClickSoundEffect.volume = 0.6;
       ClickSoundEffect.play();
       axios
         .delete(
-          `${import.meta.env.VITE_PORT}/posts/${id}/reacts?publisher=${GetUserName()}`
+          `${
+            import.meta.env.VITE_PORT
+          }/posts/${id}/reacts?publisher=${GetUserName()}`
         )
         .then((response) => {
           // Handle the response here

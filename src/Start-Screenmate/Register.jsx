@@ -12,6 +12,7 @@ const Register = () => {
   const [isImgSelected, setIsImgSelected] = useState(false);
   const [regData, setRegData] = useState({});
   const navigate = useNavigate();
+  const [errorState, setErrorState] = useState();
 
   const createWidget = () => {
     var myCropWidget = cloudinary.createUploadWidget(
@@ -57,10 +58,13 @@ const Register = () => {
         navigate("/login");
       })
       .catch(function (error) {
+        console.log(error);
+        const myErr = Object.keys(error.response.data.errors)[0];
+        setErrorState(error.response.data.errors[myErr]);
         console.log(error); // handle error
       });
   };
-
+  console.log(errorState);
   const handleShowPassword = () => {
     if (showPassword) {
       passwordInput.current.type = "password";
@@ -183,6 +187,12 @@ const Register = () => {
           >
             Login
           </Link>
+          <br />
+          {errorState && (
+            <p className="reg-button text-red-500 text-[1.2rem]">
+              {errorState}
+            </p>
+          )}
         </div>
       </div>
     </>

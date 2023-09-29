@@ -20,7 +20,7 @@ const Post = ({
 }) => {
   const [userData, setUserData] = useState();
   const [showListButton, setShowListButton] = useState(
-    data.publisher === GetUserName()
+    data.publisherData.userName === GetUserName()
   );
 
   const [isPostDeleted, setIsPostDeleted] = useState();
@@ -28,7 +28,7 @@ const Post = ({
   const [showDropDownList, setshowDropDownList] = useState(false);
 
   useEffect(() => {
-    if (data.publisherData) setUserData(data.publisherData[0]);
+    if (data.publisherData) setUserData(data.publisherData);
     else setUserData(data.publisher);
   }, [data]);
 
@@ -55,7 +55,6 @@ const Post = ({
       data.caption = param;
     }
   }
-
 
   return (
     <>

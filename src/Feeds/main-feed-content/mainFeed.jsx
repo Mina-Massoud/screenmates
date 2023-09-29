@@ -86,7 +86,7 @@ const Mainfeed = ({
     <div
       id={!profile && "scrollableDiv"}
       ref={scrollableDiv}
-      className="overflow-handle home-side  posts-section"
+      className=" home-side  posts-section"
     >
       <InfiniteScroll
         dataLength={posts.length} //This is important field to render the next data
