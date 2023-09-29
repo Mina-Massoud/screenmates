@@ -38,7 +38,6 @@ const Mainfeed = ({
   }
 
   const fetchData = () => {
-    console.log("fetching");
     pageNumber.current = pageNumber.current + 1;
     console.log("Updated pageNumber:", pageNumber.current);
     // Step 2: Include the cookie in the headers of your HTTP request
