@@ -1,8 +1,5 @@
 import React from "react";
-import img from "../../../../media/profile-img.jpg";
 import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
 import formatTimeAgo from "../../../../helperalgo/datesAlgo";
 import defaultProfilePic from "../../../../media/defaultProfilePic.jpg";
 import "animate.css";
@@ -10,7 +7,8 @@ import GetUserName from "../../../../APIS/getUserName";
 import { IoIosArrowDropdown } from "react-icons/io";
 import DropDownPostsList from "../DropDownList/DropDownList";
 import EditComment from "./Edit comment/EditComment";
-const Comment = ({ data  , postId}) => {
+import { Link } from "react-router-dom";
+const Comment = ({ data, postId }) => {
   console.log(data);
   console.log(postId);
   const [showListButton, setShowListButton] = useState(
@@ -90,15 +88,17 @@ const Comment = ({ data  , postId}) => {
             <p className="w-fit ml-auto">{data.caption}</p>
           )}
         </div>
-        <img
-          src={
-            data.commentPublisherData.imgURL
-              ? data.commentPublisherData.imgURL
-              : defaultProfilePic
-          }
-          className="min-w-[50px] w-[50px] max-w-[50px] h-[50px] rounded-full object-cover  border"
-          alt=""
-        />
+        <Link to={`/profile/${data.commentPublisherData.userName}`}>
+          <img
+            src={
+              data.commentPublisherData.imgURL
+                ? data.commentPublisherData.imgURL
+                : defaultProfilePic
+            }
+            className="min-w-[50px] w-[50px] max-w-[50px] h-[50px] rounded-full object-cover  border"
+            alt=""
+          />
+        </Link>
       </div>
     </div>
   );
