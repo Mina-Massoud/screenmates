@@ -275,8 +275,6 @@ const ProfilePage = (props) => {
     setFilter(data);
   }
 
-  console.log(userData);
-
   return (
     <>
       {showingPostDetails && (
@@ -338,7 +336,7 @@ const ProfilePage = (props) => {
           ) : (
             <button
               onClick={() => {
-                localStorage.clear("token");
+                axios.post("logout");
                 naviagte("/login");
               }}
               className="bg-red-600 py-[0.5em] px-[2em] rounded-full mt-[2.5em] text-white"
@@ -367,7 +365,7 @@ const ProfilePage = (props) => {
             <h1 className="font-black text-[1.6rem] capitalize">
               {userData.firstName} {userData.lastName}
             </h1>
-            <p>{userData.friends && userData.friends.length} Friends</p>
+            <p>{userData.friendsCount && userData.friendsCount} Friends</p>
             <p className="text-gray-500">{userData.userName}</p>
           </div>
         </div>
