@@ -6,10 +6,17 @@ import { Link } from "react-router-dom";
 const { Element, scroller } = Scroll;
 import "animate.css";
 import axios from "axios";
-
+import SocketContextHandle from "../APIS/SocketContext";
+import { useContext } from "react";
 const Home = (props) => {
   const [render, setRender] = useState(true);
   const [rooms, setRooms] = useState([]);
+  const socket = useContext(SocketContextHandle);
+
+
+  if (!socket.connected) {
+    socket.connect();
+  }
   useEffect(() => {
     setTimeout(() => {
       setRender(true);
