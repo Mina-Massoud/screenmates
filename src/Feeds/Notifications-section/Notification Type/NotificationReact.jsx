@@ -11,12 +11,11 @@ const NotificationReact = ({ causativeUser, reactType, postId }) => {
       .get(`${import.meta.env.VITE_PORT}/posts/${postId}`) // Pass an object with key-value pairs
       .then(function (response) {
         // handle success
-        console.log(response);
         setPostCaption(response.data[0].caption);
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+
       });
   }, []);
 
