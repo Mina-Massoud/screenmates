@@ -2,11 +2,11 @@ function formatTimeAgo(publishDate) {
   const currentDate = new Date();
   const date = new Date(publishDate);
 
-  const timeDifference = currentDate - date;
+  const timeDifference = Math.abs( currentDate - date );
 
   const seconds = Math.floor(timeDifference / 1000);
 
-  if (seconds === 0 || seconds === -1) {
+  if (seconds <= 0 ) {
     return "Just Now!";
   }
 

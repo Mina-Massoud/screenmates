@@ -528,11 +528,11 @@ body {
   letter-spacing: 1px;
 }
 .posts-section {
-  overflow-y: hidden;
-}
-.posts-section:hover {
   overflow-y: auto;
 }
+/* .posts-section:hover {
+  overflow-y: auto;
+} */
 /* This only changes this particular animation duration */
 .animate__animated.animate__zoomIn {
   --animate-duration: 0.6s;

@@ -11,6 +11,10 @@ import { Link } from "react-router-dom";
 import GetUserName from "../../APIS/getUserName";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRef } from "react";
+
+const axiosInstance = axios.create({
+  withCredentials: true, // Include credentials in cross-origin requests
+});
 const Mainfeed = ({
   profile = false,
   ParentShowingPostHandler,

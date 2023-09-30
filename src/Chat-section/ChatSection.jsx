@@ -15,6 +15,10 @@ const ChatSection = (props) => {
     navigate(`/chat/chat-connected?private=true&roomId=${data}`);
   }
 
+  if (!socket.connected) {
+    socket.connect();
+  }
+  
   async function handleConnectingToRoomInput() {
     if (roomId !== "") {
       await socket.emit("join_room", roomId);

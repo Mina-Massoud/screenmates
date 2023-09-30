@@ -98,7 +98,7 @@ const Reacts = ({ id, reactType }) => {
   function handleReactSelected(event) {
     if (
       ReactSelected.ReactType === event.target.name ||
-      ReactSelected.ReactType
+      (ReactSelected.ReactType && !showReacts )
     ) {
       const ClickSoundEffect = new Audio(UnselectSound);
       ClickSoundEffect.volume = 0.6;
