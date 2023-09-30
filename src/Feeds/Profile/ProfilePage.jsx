@@ -11,7 +11,7 @@ import ProfilePost from "./Profile-details-type/ProfilePost";
 import PostDetails from "../main-feed-content/Posts-section/comments/PostDetails";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import SocketContextHandle from "../APIS/SocketContext";
+import { SocketContext } from "../../APIS/SocketContext";
 import { useContext } from "react";
 const ProfilePage = (props) => {
   const [userData, setUserData] = useState();
@@ -29,7 +29,7 @@ const ProfilePage = (props) => {
   const [closingPostDetails, setCLosingPostDetails] = useState();
   const [forceRenderMainFeed, setForceRenderMainFeed] = useState(false);
   const [loading, setLoading] = useState(false);
-  const socket = useContext(SocketContextHandle);
+  const socket = useContext(SocketContext);
 
   if (!socket.connected) {
     socket.connect();

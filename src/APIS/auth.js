@@ -1,6 +1,7 @@
 import { redirect } from "react-router-dom";
 // import Cookies from "js-cookie";
 export function auth() {
+  return true;
   function getCookie(name) {
     const cookies = document.cookie.split(";");
     for (let i = 0; i < cookies.length; i++) {

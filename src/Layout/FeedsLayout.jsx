@@ -1,10 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import SocketContextHandle from "../APIS/SocketContext";
+import { SocketContext } from "../APIS/SocketContext";
 import { useContext } from "react";
 const FeedsLayout = (props) => {
-  const socket = useContext(SocketContextHandle);
+  const socket = useContext(SocketContext);
 
   if (!socket.connected) {
     socket.connect();
