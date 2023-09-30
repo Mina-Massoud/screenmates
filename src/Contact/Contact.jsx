@@ -1,11 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import "animate.css";
 import { useForm, ValidationError } from "@formspree/react";
-
+import SocketContextHandle from "../APIS/SocketContext";
+import { useContext } from "react";
 const Contact = (props) => {
   const [state, handleSubmit] = useForm("xeqbrygw");
   const form = useRef();
+  const socket = useContext(SocketContextHandle);
 
+  if (!socket.connected) {
+    socket.connect();
+  }
+  
   useEffect(() => {
     if (state.succeeded) {
       resetForm(); // Clear form fields on successful submission

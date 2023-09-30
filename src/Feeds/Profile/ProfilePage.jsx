@@ -11,6 +11,8 @@ import ProfilePost from "./Profile-details-type/ProfilePost";
 import PostDetails from "../main-feed-content/Posts-section/comments/PostDetails";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import SocketContextHandle from "../APIS/SocketContext";
+import { useContext } from "react";
 const ProfilePage = (props) => {
   const [userData, setUserData] = useState();
   const [coverImg, setCoverImg] = useState();
@@ -27,6 +29,12 @@ const ProfilePage = (props) => {
   const [closingPostDetails, setCLosingPostDetails] = useState();
   const [forceRenderMainFeed, setForceRenderMainFeed] = useState(false);
   const [loading, setLoading] = useState(false);
+  const socket = useContext(SocketContextHandle);
+
+  if (!socket.connected) {
+    socket.connect();
+  }
+
   const naviagte = useNavigate();
   function sendReactToParentFeeds(data) {
     setForceRenderMainFeed(data);
