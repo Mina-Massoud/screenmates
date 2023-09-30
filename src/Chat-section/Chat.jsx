@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { SocketContext } from "../APIS/SocketContext";
 import ReactLoading from "react-loading";
 import GetUserName from "../APIS/getUserName";
+import { FiCopy } from "react-icons/fi";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 const Chat = ({ grid }) => {
   let [messages, setMessages] = useState([]);
   let messageInput = useRef(null);
@@ -17,8 +19,7 @@ const Chat = ({ grid }) => {
   const [roomId, setRoomId] = useState(searchParams.get("roomId"));
   const [render, setRender] = useState(grid);
   const [userInter, setUserInter] = useState(false);
-  const [anonymously, setAnonymously] = useState(false);
-
+  const [copied, setCopied] = useState(false);
   useEffect(() => {
     setTimeout(() => {
       setRender(true);
@@ -111,24 +112,29 @@ const Chat = ({ grid }) => {
     <div
       className={`${
         grid ? grid : "px-[2em] pt-[6em] flex-grow"
-      } flex flex-col p-[1em] bg-[#cce4dc1c]`}
+      } flex flex-col p-[1em] bg-[#cce4dc1c] relative`}
     >
+      <CopyToClipboard
+        text={roomId}
+        onCopy={() => {
+          setCopied(true);
+        }}
+        className={`absolute z-max cursor-pointer ${
+          grid ? "top-[1.4em]" : "top-[7em]"
+        }  right-[2em] flex flex-col items-end gap-[5px]`}
+      >
+        <div className="">
+          <div className="flex items-center">
+            <FiCopy size={20} />
+            <p className="mx-[1em]">Room ID</p>
+          </div>
+          {copied && (
+            <p className="text-green-600 animate__animated animate__fadeIn">Room ID copied to clipboard</p>
+          )}
+        </div>
+      </CopyToClipboard>
       <div className="flex items-center justify-between">
         <h1 className="text-[1.5rem] font-black">Chat</h1>
-        <label className="relative inline-flex z-max items-center cursor-pointer">
-          <input
-            onClick={() => {
-              setAnonymously((prev) => !prev);
-            }}
-            type="checkbox"
-            defaultValue
-            className="sr-only peer"
-          />
-          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600" />
-          <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-            Anonymous mode
-          </span>
-        </label>
       </div>
 
       {userInter ? (
@@ -141,13 +147,7 @@ const Chat = ({ grid }) => {
       <ScrollToBottom className="content-chat h-[50vh] flex-grow md:h-[68vh] overflow-handle py-[2em] flex-grow-handle">
         {messages.length ? (
           messages.map((message) => {
-            return (
-              <RenderMessage
-                anonymously={anonymously}
-                socket={socket.id}
-                message={message}
-              />
-            );
+            return <RenderMessage socket={socket.id} message={message} />;
           })
         ) : (
           <p>no messages until now. be the first one!</p>

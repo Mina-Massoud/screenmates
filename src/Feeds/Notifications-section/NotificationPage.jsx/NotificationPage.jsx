@@ -43,12 +43,6 @@ const NotificationPage = ({
     return;
   }
 
-  useEffect(() => {
-    if (socket) {
-      const notificationSoundAudio = new Audio(notificationSound);
-      notificationSoundAudio.play();
-    }
-  }, []);
 
   return (
     <div className={className}>

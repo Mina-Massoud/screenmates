@@ -175,11 +175,6 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
                   next={fetchData}
                   hasMore={hasMoreState}
                   scrollableTarget="comment_scroll"
-                  endMessage={
-                    <p className="text-center py-[2em]">
-                      <b>Yay! You have seen it all</b>
-                    </p>
-                  }
                   loader={<h4>Loading...</h4>}
                 >
                   {commentsList.map((comment) => {

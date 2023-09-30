@@ -65,11 +65,6 @@ const Notification = (props) => {
       next={fetchData}
       hasMore={hasMoreState}
       scrollableTarget="left-side-scrollBar"
-      endMessage={
-        <p className="text-center py-[2em]">
-          <b>Yay! You have seen it all</b>
-        </p>
-      }
       loader={<h4>Loading...</h4>}
       className=" bg-[#282828] notifications-container mx-[0.2em] flex flex-col gap-[10px] p-[0.5em] rounded-lg"
     >

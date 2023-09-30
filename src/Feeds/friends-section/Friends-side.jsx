@@ -52,11 +52,6 @@ const FriendsSide = (props) => {
         next={fetchData}
         hasMore={hasMoreState}
         scrollableTarget="scrollableDiv"
-        endMessage={
-          <p className="text-center py-[2em]">
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
         className="friends-cont flex flex-col"
       >
         {friends.map((friend) => {
