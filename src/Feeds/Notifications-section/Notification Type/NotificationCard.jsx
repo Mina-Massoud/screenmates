@@ -99,8 +99,8 @@ const NotificationCard = ({
           <img
             className="min-w-[1px] main-text-gradient-background mr-[1em] aspect-square rounded-lg max-w-[50px] max-h-[50px] rounded-lg"
             src={
-              data.userData.userImgURL
-                ? data.userData.userImgURL
+              data.userData.imgURL
+                ? data.userData.imgURL
                 : defaultProfilePic
             }
             alt="friend-img"

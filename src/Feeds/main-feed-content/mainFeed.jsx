@@ -52,7 +52,7 @@ const Mainfeed = ({
           }/users/${userNameURL}/posts?req=${GetUserName()}&mediaType=${filter}&offset=${
             pageNumber.current
           }&limit=${10}`
-        : `${import.meta.env.VITE_PORT}/feed/${userNameURL}?offset=${
+        : `${import.meta.env.VITE_PORT}/feed/${GetUserName()}?offset=${
             pageNumber.current
           }&limit=${10}`;
 

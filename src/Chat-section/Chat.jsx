@@ -46,17 +46,17 @@ const Chat = ({ grid }) => {
       socket.on("room_created", handleRoomID);
       // setIsConnected(true);
     }
-    socket.on("userJoined", (data) => {
-      console.log(data);
-      if (data.connectedUser !== GetUserName()) {
-        const userJoinedData = {
-          connectedUser: data.connectedUser,
-          message: `${data.connectedUser} Joined the room!`,
-          messageType: "alert",
-        };
-        setMessages((prev) => [...prev, userJoinedData]);
-      }
-    });
+    // socket.on("userJoined", (data) => {
+    //   console.log(data);
+    //   if (data.connectedUser !== GetUserName()) {
+    //     const userJoinedData = {
+    //       connectedUser: data.connectedUser,
+    //       message: `${data.connectedUser} Joined the room!`,
+    //       messageType: "alert",
+    //     };
+    //     setMessages((prev) => [...prev, userJoinedData]);
+    //   }
+    // });
     // socket.on("userIsConnected", connectedUser);
     socket.on("message_received", handleMessageReceived);
 

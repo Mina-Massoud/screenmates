@@ -338,7 +338,7 @@ const ProfilePage = (props) => {
           ) : (
             <button
               onClick={() => {
-                localStorage.clear("token");
+                axios.post(`${import.meta.env.VITE_PORT}/logout`);  
                 naviagte("/login");
               }}
               className="bg-red-600 py-[0.5em] px-[2em] rounded-full mt-[2.5em] text-white"
