@@ -12,7 +12,7 @@ const ChatSection = (props) => {
 
   function handleRoomConnect(data) {
     if (data)
-    navigate(`/chat/chat-connected?private=true&roomId=${data}`);
+    navigate(`/chat/chat-connected?private=true&roomId=${data.roomID}`);
   }
 
   if (!socket.connected) {
