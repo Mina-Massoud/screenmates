@@ -49,7 +49,7 @@ const ProfileCardFeed = (props) => {
         {userData.firstName} {userData.lastName}
       </h3>
       <p className="text-center text-[0.7em] text-gray-400">
-        {userData.userName}@
+      @{userData.userName}
       </p>
       <Link
         to={`/profile/${userData.userName}`}

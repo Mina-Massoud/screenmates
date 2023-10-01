@@ -77,7 +77,7 @@ const Mainfeed = ({
   // useEffect(() => {
   //   fetchData(); // Fetch initial data
   // }, []);
-console.log(posts);
+  console.log(posts);
   useEffect(() => {
     pageNumber.current = 0;
     setPosts([]);
@@ -114,9 +114,6 @@ console.log(posts);
             </Link>
             <Link to={`/profile/${GetUserName()}`}>
               <BsFillPersonFill className="bg-[#ffffff24] hidden profile-icon w-[35px] h-[35px] sm:w-[50px] sm:h-[50px] p-[0.5em] sm:p-[1em] hover:bg-[#535353] mx-[1em] rounded-full transition duration-300 cursor-pointer" />
-            </Link>
-            <Link>
-              <AiFillMessage className="bg-[#ffffff24] hidden chat-icon  w-[35px] h-[35px] sm:w-[50px] sm:h-[50px] hover:bg-[#535353] p-[0.5em] sm:p-[1em] mx-[1em]  rounded-full transition duration-300 cursor-pointer" />
             </Link>
           </div>
         )}

@@ -31,12 +31,16 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
 
   useEffect(() => {
     if (!id) {
+      console.log(param.id);
       id = param.id;
       setCloseSelf(true);
     }
   }, []);
 
   function fetchData() {
+    if (!id) {
+      id = param.id;
+    }
     pageNumber.current = pageNumber.current + 1;
     axios
       .get(
@@ -58,6 +62,9 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   }
 
   useEffect(() => {
+    if (!id) {
+      id = param.id;
+    }
     axios
       .get(`${import.meta.env.VITE_PORT}/posts/${id}?req=${GetUserName()}`) // Pass an object with key-value pairs
       .then(function (response) {
@@ -76,6 +83,9 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
   }, []);
 
   function handleSendComment() {
+    if (!id) {
+      id = param.id;
+    }
     if (delayTime) {
       if (Date.now() - delayTime < 2000) {
         setSending("MANY REQUESTS");
@@ -175,11 +185,6 @@ const PostDetails = ({ id, close = false, sendReactToParentFeeds }) => {
                   next={fetchData}
                   hasMore={hasMoreState}
                   scrollableTarget="comment_scroll"
-                  endMessage={
-                    <p className="text-center py-[2em]">
-                      <b>Yay! You have seen it all</b>
-                    </p>
-                  }
                   loader={<h4>Loading...</h4>}
                 >
                   {commentsList.map((comment) => {
