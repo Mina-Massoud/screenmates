@@ -58,9 +58,7 @@ Here are the steps to start the project locally.
 1. Clone the repository (Frontend Side)
 
 ```sh
-HTTPS - $ git clone https://github.com/alex-dishen/shop.git](https://github.com/minamelad33333/screenmates.git
-or
-SSH - $ git clone git@github.com:alex-dishen/shop.git
+HTTPS - $ git clone https://github.com/minamelad33333/screenmates.git
 ```
 
 3. Install the dependencies.
