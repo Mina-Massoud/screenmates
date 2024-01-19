@@ -1,7 +1,8 @@
 <h1 align='center'>ScreenMates</h1>
 
-![Preview](images/preview.gif)
-
+<p align="center">
+  <img src="images/preview.gif" alt="Preview">
+</p>
 <h2>Demo</h2>
 
 🔥 [Live Demo](https://screenmates-beta-v.onrender.com/)
