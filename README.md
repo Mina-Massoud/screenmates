@@ -4,7 +4,7 @@
 
 <h2>Demo</h2>
 
-🔥 [Live Demo]([https://alex-dishen.github.io/game-harbor/](https://screenmates-beta-v.onrender.com/))
+🔥 [Live Demo](https://screenmates-beta-v.onrender.com/)
 
 <h2>Built with</h2>
 
@@ -13,7 +13,7 @@
 - React
 - socket io
 - Tailwind CSS
-- cloudinary for Images/Videos
+- cloudinary for images/videos
 
 <h3>Back-End</h3>
 
