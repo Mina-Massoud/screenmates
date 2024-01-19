@@ -32,13 +32,13 @@
 
 <h2>🚀 Key Features</h2>
 
-✅ Real-time Watch Together Rooms
-✅ Random and Private chats and rooms
-✅ Create new posts (Images, videos, text)
-✅ React to Friends' Posts
-✅ Make Comments on Friends' Posts
-✅ Real-time Notifications
-✅ Make New Friends within the Platform
+- ✅ Real-time Watch Together Rooms
+- ✅ Random and Private chats and rooms
+- ✅ Create new posts (Images, videos, text)
+- ✅ React to Friends' Posts
+- ✅ Make Comments on Friends' Posts
+- ✅ Real-time Notifications
+- ✅ Make New Friends within the Platform
 
 </br>
 
